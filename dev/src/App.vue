@@ -1,50 +1,56 @@
 ﻿<template>
 
     <!-- Loading Screen -->
-<div class="loader-overlay" :class="{ 'loader-hidden': !isLoading }">
-    <div class="loader-content">
-        <div class="loader-logo">
-            <svg width="50" height="57" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z" fill="#c8a96e"/>
-                <path d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z" fill="#f5f0e8"/>
-            </svg>
+    <div class="loader-overlay" :class="{ 'loader-hidden': !isLoading }">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <svg width="50" height="57" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z"
+                        fill="#c8a96e" />
+                    <path
+                        d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z"
+                        fill="#f5f0e8" />
+                </svg>
+            </div>
+            <p class="loader-studio-name">NK Studio</p>
+            <div class="loader-brush-track">
+                <div class="loader-brush-fill"></div>
+            </div>
+            <p class="loader-tagline">Loading artwork...</p>
         </div>
-        <p class="loader-studio-name">NK Studio</p>
-        <div class="loader-brush-track">
-            <div class="loader-brush-fill"></div>
-        </div>
-        <p class="loader-tagline">Loading artwork...</p>
     </div>
-</div>
 
 
     <div class="navbar-container">
         <div class="card navbar-card">
-        <Menubar :model="items">
-            <template #start>
-                <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-2rem">
-                    <path
-                        d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z"
-                        fill="var(--primary-color)"
-                    />
-                    <path
-                        d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z"
-                        fill="var(--text-color)"
-                    />
-                </svg>
-            </template>
-            <template #item="{ item, props, hasSubmenu, root }">
-                <a v-ripple class="flex align-items-center" v-bind="props.action">
-                    <span :class="item.icon" />
-                    <span class="ml-2">{{ item.label }}</span>
-                    <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
-                    <span v-if="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
-                    <i v-if="hasSubmenu" :class="['pi pi-angle-down', { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root }]"></i>
-                </a>
-            </template>
-            <template #end>
-            </template>
-        </Menubar>
+            <Menubar :model="items">
+                <template #start>
+                    <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="h-2rem">
+                        <path
+                            d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z"
+                            fill="var(--primary-color)" />
+                        <path
+                            d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z"
+                            fill="var(--text-color)" />
+                    </svg>
+                </template>
+                <template #item="{ item, props, hasSubmenu, root }">
+                    <a v-ripple class="flex align-items-center" v-bind="props.action">
+                        <span :class="item.icon" />
+                        <span class="ml-2">{{ item.label }}</span>
+                        <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
+                        <span v-if="item.shortcut"
+                            class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{
+                            item.shortcut }}</span>
+                        <i v-if="hasSubmenu"
+                            :class="['pi pi-angle-down', { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root }]"></i>
+                    </a>
+                </template>
+                <template #end>
+                </template>
+            </Menubar>
         </div>
     </div>
 
@@ -59,12 +65,8 @@
             <h3>Color Theme Editor (60-30-10)</h3>
 
             <div class="preset-buttons">
-                <button
-                    v-for="preset in themePresets"
-                    :key="preset.name"
-                    @click="applyTheme(preset)"
-                    class="preset-btn"
-                >
+                <button v-for="preset in themePresets" :key="preset.name" @click="applyTheme(preset)"
+                    class="preset-btn">
                     {{ preset.name }}
                 </button>
             </div>
@@ -96,16 +98,26 @@
             <button @click="resetTheme" class="reset-btn">Reset to Default</button>
         </div>
     </div>
-
     <!-- Hero / Tag Section -->
     <div class="tag-section" id="home">
-        <svg class="hero-brush" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <path d="M-10 80 Q200 40 400 90 Q600 140 810 70" stroke="#2a2720" stroke-width="60" fill="none" opacity="0.8"/>
-            <path d="M-10 200 Q150 160 350 210 Q550 255 810 190" stroke="#242118" stroke-width="40" fill="none" opacity="0.6"/>
-            <circle cx="680" cy="40" r="90" fill="#221f1b" opacity="0.5"/>
-            <circle cx="90" cy="250" r="60" fill="#211e1a" opacity="0.4"/>
-            <path d="M620 10 Q680 60 640 110" stroke="#c8a96e" stroke-width="1.5" fill="none" opacity="0.25"/>
-            <path d="M60 240 Q30 200 80 170" stroke="#c8a96e" stroke-width="1.5" fill="none" opacity="0.2"/>
+        <svg class="hero-brush" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid slice"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M-10 80 Q200 40 400 90 Q600 140 810 70" stroke="#1f2937" stroke-width="60" fill="none"
+                opacity="0.8" />
+
+            <path d="M-10 200 Q150 160 350 210 Q550 255 810 190" stroke="#111827" stroke-width="40" fill="none"
+                opacity="0.6" />
+
+            <circle cx="680" cy="40" r="90" fill="#0f172a" opacity="0.5" />
+            <circle cx="90" cy="250" r="60" fill="#0f172a" opacity="0.4" />
+
+            <path d="M620 10 Q680 60 640 110" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.3" />
+
+            <path d="M60 240 Q30 200 80 170" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.2" />
+
+            <circle cx="680" cy="40" r="90" fill="#221f1b" opacity="0.5" />
+            <circle cx="90" cy="250" r="60" fill="#211e1a" opacity="0.4" />
+
         </svg>
 
         <div class="hero-eyebrow">
@@ -124,99 +136,83 @@
     </div>
 
     <!-- Gallery Slideshow -->
-<div class="gallery-container">
-    <button class="gallery-btn gallery-btn-left" @click="scrollGallery('left')">
-        <i class="pi pi-chevron-left"></i>
-    </button>
-    <div class="gallery-scroll-track" ref="galleryTrack">
-        <div
-            v-for="(item, index) in galleryItems"
-            :key="index"
-            class="gallery-scroll-item"
-            :class="{ active: activeIndex === index }"
-            @click="handleGalleryClick(index)"
-        >
-            <img :src="item.src" :alt="item.alt" />
+    <div class="gallery-container">
+        <button class="gallery-btn gallery-btn-left" @click="scrollGallery('left')">
+            <i class="pi pi-chevron-left"></i>
+        </button>
+        <div class="gallery-scroll-track" ref="galleryTrack">
+            <div v-for="(item, index) in galleryItems" :key="index" class="gallery-scroll-item"
+                :class="{ active: activeIndex === index }" @click="handleGalleryClick(index)">
+                <img :src="item.src" :alt="item.alt" />
+            </div>
         </div>
+        <button class="gallery-btn gallery-btn-right" @click="scrollGallery('right')">
+            <i class="pi pi-chevron-right"></i>
+        </button>
     </div>
-    <button class="gallery-btn gallery-btn-right" @click="scrollGallery('right')">
-        <i class="pi pi-chevron-right"></i>
-    </button>
-</div>
 
     <!-- Intro Section -->
     <div class="intro-section">
         <div class="intro-content">
             <h1 style="text-align:center;white-space:pre-wrap;">NK Studio (Nathan K.)</h1>
-            <h2 style="text-align:center;white-space:pre-wrap;">Nathan K. is an independent illustration studio specializing in anime and cartoon-inspired artwork, character design, and custom commissions. The studio focuses on vibrant colors, expressive characters, and stylized visuals tailored for personal and commercial projects.</h2>
+            <h2 style="text-align:center;white-space:pre-wrap;">Nathan K. is an independent illustration studio
+                specializing
+                in anime and cartoon-inspired artwork, character design, and custom commissions. The studio focuses on
+                vibrant colors, expressive characters, and stylized visuals tailored for personal and commercial
+                projects.
+            </h2>
         </div>
     </div>
 
-<!-- Masonry Works Grid -->
-<div class="works-section" id="works">
-    <h2 class="works-title">Featured Works</h2>
-    <TransitionGroup name="work-card" tag="div" class="masonry-grid">
-        <div
-            v-for="(work, index) in visibleWorks"
-            :key="work.title"
-            class="masonry-item"
-            :class="work.className"
-            :style="{ transitionDelay: `${(index % 4) * 80}ms` }"
-            @click="openWorkModal(work)"
-        >
-            <div class="work-image-wrapper">
-                <img :src="work.image" :alt="work.title" class="work-image" />
-                <div class="work-overlay">
-                    <h3 class="work-title">{{ work.title }}</h3>
-                    <p class="work-category">{{ work.category }}</p>
+    <!-- Masonry Works Grid -->
+    <div class="works-section" id="works">
+        <h2 class="works-title">Featured Works</h2>
+        <TransitionGroup name="work-card" tag="div" class="masonry-grid">
+            <div v-for="(work, index) in visibleWorks" :key="work.title" class="masonry-item" :class="work.className"
+                :style="{ transitionDelay: `${(index % 4) * 80}ms` }" @click="openWorkModal(work)">
+                <div class="work-image-wrapper">
+                    <img :src="work.image" :alt="work.title" class="work-image" />
+                    <div class="work-overlay">
+                        <h3 class="work-title">{{ work.title }}</h3>
+                        <p class="work-category">{{ work.category }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </TransitionGroup>
+        </TransitionGroup>
 
-    <div class="load-more-wrapper">
-        <button v-if="hasMore" @click="loadMore" class="load-more-btn">
-            Load More
-        </button>
+        <div class="load-more-wrapper">
+            <button v-if="hasMore" @click="loadMore" class="load-more-btn">
+                Load More
+            </button>
+        </div>
     </div>
-</div>
 
     <!-- Work Modal Dialog -->
-<Dialog
-    v-model:visible="showWorkModal"
-    :modal="true"
-    :showHeader="false"
-    :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-    :style="{ width: 'fit-content', maxWidth: '90vw', maxHeight: '90vh', padding: '0', margin: '0' }"
-    :pt="{
-        content: { style: 'padding: 0; margin: 0;' },
-        root: { style: 'padding: 0; overflow: hidden;' }
-    }"
-    class="work-modal"
->
+    <Dialog v-model:visible="showWorkModal" :modal="true" :showHeader="false"
+        :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
+        :style="{ width: 'fit-content', maxWidth: '90vw', maxHeight: '90vh', padding: '0', margin: '0' }" :pt="{
+            content: { style: 'padding: 0; margin: 0;' },
+            root: { style: 'padding: 0; overflow: hidden;' }
+        }" class="work-modal">
 
-    <div v-if="selectedWork" class="modal-content">
-        <button class="modal-close-btn" @click="showWorkModal = false">
-            <i class="pi pi-times"></i>
-        </button>
-        <img :src="selectedWork.image" :alt="selectedWork.title" class="modal-image" />
-        <div class="modal-info">
-            <h3 class="modal-title">{{ selectedWork?.title }}</h3>
-            <p class="modal-category">{{ selectedWork?.category }}</p>
+        <div v-if="selectedWork" class="modal-content">
+            <button class="modal-close-btn" @click="showWorkModal = false">
+                <i class="pi pi-times"></i>
+            </button>
+            <img :src="selectedWork.image" :alt="selectedWork.title" class="modal-image" />
+            <div class="modal-info">
+                <h3 class="modal-title">{{ selectedWork?.title }}</h3>
+                <p class="modal-category">{{ selectedWork?.category }}</p>
+            </div>
         </div>
-    </div>
-</Dialog>
+    </Dialog>
 
     <!-- Commission Tiers Section -->
     <div class="tiers-section" id="services">
         <h2 class="tiers-title">Commission Tiers</h2>
         <div class="tiers-grid">
-            <div
-                v-for="(tier, index) in commissionTiers"
-                :key="index"
-                class="tier-card"
-                :class="{ featured: tier.featured }"
-            >
+            <div v-for="(tier, index) in commissionTiers" :key="index" class="tier-card"
+                :class="{ featured: tier.featured }">
                 <span v-if="tier.featured" class="tier-badge">Most popular</span>
                 <p class="tier-name">{{ tier.name }}</p>
                 <div class="tier-price">
@@ -240,15 +236,18 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="name" class="form-label">Name *</label>
-                        <InputText id="name" v-model="contactForm.name" placeholder="Your Name" class="form-input" required />
+                        <InputText id="name" v-model="contactForm.name" placeholder="Your Name" class="form-input"
+                            required />
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label">Email *</label>
-                        <InputText id="email" v-model="contactForm.email" type="email" placeholder="your@email.com" class="form-input" required />
+                        <InputText id="email" v-model="contactForm.email" type="email" placeholder="your@email.com"
+                            class="form-input" required />
                     </div>
                     <div class="form-group">
                         <label for="subject" class="form-label">Subject *</label>
-                        <InputText id="subject" v-model="contactForm.subject" placeholder="Project Subject" class="form-input" required />
+                        <InputText id="subject" v-model="contactForm.subject" placeholder="Project Subject"
+                            class="form-input" required />
                     </div>
                     <div class="form-group">
                         <label for="phone" class="form-label">Phone</label>
@@ -267,7 +266,8 @@
 
                 <div class="form-group full-width">
                     <label for="message" class="form-label">Message *</label>
-                    <Textarea id="message" v-model="contactForm.message" placeholder="Tell us about your project..." :autoResize="true" rows="6" class="form-textarea" required />
+                    <Textarea id="message" v-model="contactForm.message" placeholder="Tell us about your project..."
+                        :autoResize="true" rows="6" class="form-textarea" required />
                 </div>
 
                 <Button label="Send Message" class="submit-button" type="submit" severity="primary" />
@@ -293,10 +293,14 @@
                 <div class="footer-section footer-social">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#" class="social-btn" title="Facebook" aria-label="Facebook"><i class="pi pi-facebook"></i></a>
-                        <a href="#" class="social-btn" title="LinkedIn" aria-label="LinkedIn"><i class="pi pi-linkedin"></i></a>
-                        <a href="#" class="social-btn" title="Instagram" aria-label="Instagram"><i class="pi pi-instagram"></i></a>
-                        <a href="#" class="social-btn" title="X (Twitter)" aria-label="X"><i class="pi pi-twitter"></i></a>
+                        <a href="#" class="social-btn" title="Facebook" aria-label="Facebook"><i
+                                class="pi pi-facebook"></i></a>
+                        <a href="#" class="social-btn" title="LinkedIn" aria-label="LinkedIn"><i
+                                class="pi pi-linkedin"></i></a>
+                        <a href="#" class="social-btn" title="Instagram" aria-label="Instagram"><i
+                                class="pi pi-instagram"></i></a>
+                        <a href="#" class="social-btn" title="X (Twitter)" aria-label="X"><i
+                                class="pi pi-twitter"></i></a>
                     </div>
                 </div>
             </div>
@@ -304,7 +308,8 @@
             <div class="footer-bottom">
                 <div class="footer-bottom-left">
                     <p class="copyright">© 2025 Nathan K. All content copyright. All rights reserved.</p>
-                    <p class="ai-disclaimer">No work may be used without permission or for the purpose of training AI.</p>
+                    <p class="ai-disclaimer">No work may be used without permission or for the purpose of training AI.
+                    </p>
                 </div>
                 <div class="footer-bottom-right">
                     <p class="footer-credit-label">Website by</p>
@@ -344,7 +349,7 @@ const loadMore = () => {
 const hasMore = computed(() => visibleCount.value < works.value.length)
 
 
-const activeIndex = ref(0);
+const activeIndex = ref(2);
 const showWorkModal = ref(false);
 const selectedWork = ref(null);
 const showThemePanel = ref(false);
@@ -355,12 +360,12 @@ const openWorkModal = (work) => {
 };
 
 const themePresets = [
-    { name: 'Purple',  primary: '#9333ea', secondary: '#a78bfa', accent: '#f59e0b' },
-    { name: 'Blue',    primary: '#3b82f6', secondary: '#93c5fd', accent: '#ec4899' },
-    { name: 'Teal',    primary: '#14b8a6', secondary: '#7ee8de', accent: '#f97316' },
-    { name: 'Rose',    primary: '#e11d48', secondary: '#fbcfe8', accent: '#0ea5e9' },
+    { name: 'Purple', primary: '#9333ea', secondary: '#a78bfa', accent: '#f59e0b' },
+    { name: 'Blue', primary: '#3b82f6', secondary: '#93c5fd', accent: '#ec4899' },
+    { name: 'Teal', primary: '#14b8a6', secondary: '#7ee8de', accent: '#f97316' },
+    { name: 'Rose', primary: '#e11d48', secondary: '#fbcfe8', accent: '#0ea5e9' },
     { name: 'Emerald', primary: '#059669', secondary: '#a7f3d0', accent: '#f59e0b' },
-    { name: 'Orange',  primary: '#ea580c', secondary: '#fed7aa', accent: '#06b6d4' }
+    { name: 'Orange', primary: '#ea580c', secondary: '#fed7aa', accent: '#06b6d4' }
 ];
 
 const customTheme = ref({ primary: '#9333ea', secondary: '#a78bfa', accent: '#f59e0b' });
@@ -408,90 +413,90 @@ const submitForm = () => {
 };
 
 const commissionTiers = ref([
-    { name: 'Starter',      price: 50,  description: 'Simple character illustration or portrait. Includes basic pose and background.', featured: false },
+    { name: 'Starter', price: 50, description: 'Simple character illustration or portrait. Includes basic pose and background.', featured: false },
     { name: 'Professional', price: 150, description: 'Full-body character design with custom pose, detailed background, and color variations.', featured: true },
-    { name: 'Premium',      price: 300, description: 'Complex multi-character composition, custom environment, multiple revisions, and hi-res deliverables.', featured: false }
+    { name: 'Premium', price: 300, description: 'Complex multi-character composition, custom environment, multiple revisions, and hi-res deliverables.', featured: false }
 ]);
 
 const works = ref([
     // Row 1: [1] [wide=2] [1]
-    { title: 'Olivia - Character Design',   category: 'Illustration',   image: '/img/Olivia/Olivia-1.png',                              className: '' },
-    { title: 'Aztec - Body Study',          category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Body Study.png', className: 'wide' },
-    { title: 'Olivia - Expression Study',   category: 'Digital Art',    image: '/img/Olivia/Olivia-2.png',                              className: '' },
+    { title: 'Olivia - Character Design', category: 'Illustration', image: '/img/Olivia/Olivia-1.png', className: '' },
+    { title: 'Aztec - Body Study', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Body Study.png', className: 'wide' },
+    { title: 'Olivia - Expression Study', category: 'Digital Art', image: '/img/Olivia/Olivia-2.png', className: '' },
 
     // Row 2: [1] [1] [wide=2]
-    { title: 'Olivia - Full Body',          category: 'Character',      image: '/img/Olivia/Olivia-3.png',                              className: '' },
-    { title: 'Zani - Character Design',     category: 'Concept Art',    image: '/img/Zani/Zani.png',                                    className: '' },
-    { title: 'Aztec - Color Variations',    category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Color Var.png', className: 'wide' },
+    { title: 'Olivia - Full Body', category: 'Character', image: '/img/Olivia/Olivia-3.png', className: '' },
+    { title: 'Zani - Character Design', category: 'Concept Art', image: '/img/Zani/Zani.png', className: '' },
+    { title: 'Aztec - Color Variations', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Color Var.png', className: 'wide' },
 
     // Row 3: [1] [wide=2] [1]
-    { title: 'Olivia - Pose Variation',     category: 'Animation',      image: '/img/Olivia/Olivia-4.png',                              className: '' },
-    { title: 'Aztec - Facial Expressions',  category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExp.png', className: 'wide' },
-    { title: 'Zani - Expression',           category: 'Illustration',   image: '/img/Zani/Zani-2.png',                                  className: '' },
+    { title: 'Olivia - Pose Variation', category: 'Animation', image: '/img/Olivia/Olivia-4.png', className: '' },
+    { title: 'Aztec - Facial Expressions', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExp.png', className: 'wide' },
+    { title: 'Zani - Expression', category: 'Illustration', image: '/img/Zani/Zani-2.png', className: '' },
 
     // Row 4: [1] [1] [wide=2]
-    { title: 'Olivia - Dynamic Pose',       category: 'Fantasy',        image: '/img/Olivia/Olivia-5.png',                              className: '' },
-    { title: 'Zani - Pose Study',           category: 'Character',      image: '/img/Zani/Zani-3.png',                                  className: '' },
-    { title: 'Aztec - Turnarounds',         category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_TurnArounds.png', className: 'wide' },
+    { title: 'Olivia - Dynamic Pose', category: 'Fantasy', image: '/img/Olivia/Olivia-5.png', className: '' },
+    { title: 'Zani - Pose Study', category: 'Character', image: '/img/Zani/Zani-3.png', className: '' },
+    { title: 'Aztec - Turnarounds', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_TurnArounds.png', className: 'wide' },
 
     // Row 5: [1] [wide=2] [1]
-    { title: 'Olivia - Detail Study',       category: 'Illustration',   image: '/img/Olivia/Olivia-6.png',                              className: '' },
-    { title: 'Esther - Final',              category: 'Illustration',   image: '/img/illustration/Esther_Final__2.png',                 className: 'wide' },
-    { title: 'Olivia - Final Render',       category: 'Illustration',   image: '/img/Olivia/Olivia-7.png',                              className: '' },
+    { title: 'Olivia - Detail Study', category: 'Illustration', image: '/img/Olivia/Olivia-6.png', className: '' },
+    { title: 'Esther - Final', category: 'Illustration', image: '/img/illustration/Esther_Final__2.png', className: 'wide' },
+    { title: 'Olivia - Final Render', category: 'Illustration', image: '/img/Olivia/Olivia-7.png', className: '' },
 
     // Row 6: [1] [1] [wide=2]
-    { title: 'Zani - Detail',              category: 'Character',      image: '/img/Zani/Zani-4.png',                                  className: '' },
-    { title: 'Zani - Final',               category: 'Illustration',   image: '/img/Zani/Zani-5.png',                                  className: '' },
-    { title: 'Illustration Render',        category: 'Illustration',   image: '/img/illustration/Illustration70_Render6.png',           className: 'wide' },
+    { title: 'Zani - Detail', category: 'Character', image: '/img/Zani/Zani-4.png', className: '' },
+    { title: 'Zani - Final', category: 'Illustration', image: '/img/Zani/Zani-5.png', className: '' },
+    { title: 'Illustration Render', category: 'Illustration', image: '/img/illustration/Illustration70_Render6.png', className: 'wide' },
 
     // Row 7: [1] [wide=2] [1]
-    { title: 'Gold Material Study',        category: 'Material Study', image: '/img/Material Study_Armor/gold.png',                    className: '' },
-    { title: 'Aztec - Staff Design',       category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Staff Design.png', className: 'wide' },
-    { title: 'Gold Variant 2',             category: 'Material Study', image: '/img/Material Study_Armor/gold2.png',                   className: '' },
+    { title: 'Gold Material Study', category: 'Material Study', image: '/img/Material Study_Armor/gold.png', className: '' },
+    { title: 'Aztec - Staff Design', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Staff Design.png', className: 'wide' },
+    { title: 'Gold Variant 2', category: 'Material Study', image: '/img/Material Study_Armor/gold2.png', className: '' },
 
     // Row 8: [1] [1] [wide=2]
-    { title: 'Metal Study',               category: 'Material Study', image: '/img/Material Study_Armor/metal2.png',                  className: '' },
-    { title: 'Wood Study',                category: 'Material Study', image: '/img/Material Study_Armor/wood.png',                    className: '' },
-    { title: 'Aztec - Pose Sheet',        category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Pose.png', className: 'wide' },
+    { title: 'Metal Study', category: 'Material Study', image: '/img/Material Study_Armor/metal2.png', className: '' },
+    { title: 'Wood Study', category: 'Material Study', image: '/img/Material Study_Armor/wood.png', className: '' },
+    { title: 'Aztec - Pose Sheet', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Pose.png', className: 'wide' },
 
     // Row 9: [1] [wide=2] [1]
-    { title: 'Illustration 14',           category: 'Illustration',   image: '/img/illustration/Illustration_14.4.png',                className: '' },
-    { title: 'Aztec - Final Render',      category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Render.png', className: 'wide' },
-    { title: 'Illustration 19',           category: 'Illustration',   image: '/img/illustration/Illustration_19.4.png',                className: '' },
+    { title: 'Illustration 14', category: 'Illustration', image: '/img/illustration/Illustration_14.4.png', className: '' },
+    { title: 'Aztec - Final Render', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Render.png', className: 'wide' },
+    { title: 'Illustration 19', category: 'Illustration', image: '/img/illustration/Illustration_19.4.png', className: '' },
 
     // Remaining singles
-    { title: 'Illustration 2',            category: 'Illustration',   image: '/img/illustration/Illustration_2.2.png',                 className: '' },
-    { title: 'Illustration 4',            category: 'Illustration',   image: '/img/illustration/Illustration_4.2.png',                 className: '' },
-    { title: 'Illustration 6',            category: 'Illustration',   image: '/img/illustration/Illustration_6.17.png',                className: '' },
-    { title: 'Illustration 80',           category: 'Illustration',   image: '/img/illustration/Illustration80-Render7.png',           className: '' },
-    { title: 'Umbrall Valentines',        category: 'Illustration',   image: '/img/illustration/Umbrall_valentines.png',               className: '' },
-    { title: 'Gold Variant 3',            category: 'Material Study', image: '/img/Material Study_Armor/gold3.png',                   className: '' },
-    { title: 'Metal Variant 3',           category: 'Material Study', image: '/img/Material Study_Armor/metal3.png',                  className: '' },
-    { title: 'Wood Variant 2',            category: 'Material Study', image: '/img/Material Study_Armor/wood2.png',                   className: '' },
-    { title: 'Aztec - Items',             category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Items.png', className: '' },
-    { title: 'Aztec - Staff Colors',      category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Staff Color Var.png', className: '' },
-    { title: 'Aztec - Expression Study',  category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExpStudy.png', className: '' },
+    { title: 'Illustration 2', category: 'Illustration', image: '/img/illustration/Illustration_2.2.png', className: '' },
+    { title: 'Illustration 4', category: 'Illustration', image: '/img/illustration/Illustration_4.2.png', className: '' },
+    { title: 'Illustration 6', category: 'Illustration', image: '/img/illustration/Illustration_6.17.png', className: '' },
+    { title: 'Illustration 80', category: 'Illustration', image: '/img/illustration/Illustration80-Render7.png', className: '' },
+    { title: 'Umbrall Valentines', category: 'Illustration', image: '/img/illustration/Umbrall_valentines.png', className: '' },
+    { title: 'Gold Variant 3', category: 'Material Study', image: '/img/Material Study_Armor/gold3.png', className: '' },
+    { title: 'Metal Variant 3', category: 'Material Study', image: '/img/Material Study_Armor/metal3.png', className: '' },
+    { title: 'Wood Variant 2', category: 'Material Study', image: '/img/Material Study_Armor/wood2.png', className: '' },
+    { title: 'Aztec - Items', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Items.png', className: '' },
+    { title: 'Aztec - Staff Colors', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Staff Color Var.png', className: '' },
+    { title: 'Aztec - Expression Study', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExpStudy.png', className: '' },
 ]);
 
 
 const galleryItems = ref([
-    { src: 'https://primefaces.org/cdn/primevue/images/galleria/galleria1.jpg', alt: 'Project 1' },
-    { src: 'https://primefaces.org/cdn/primevue/images/galleria/galleria2.jpg', alt: 'Project 2' },
-    { src: 'https://primefaces.org/cdn/primevue/images/galleria/galleria3.jpg', alt: 'Project 3' },
-    { src: 'https://primefaces.org/cdn/primevue/images/galleria/galleria4.jpg', alt: 'Project 4' },
-    { src: 'https://primefaces.org/cdn/primevue/images/galleria/galleria5.jpg', alt: 'Project 5' }
+    { src: '/img/illustration/Illustration_4.2.png', alt: 'Illustration' },
+    { src: '/img/illustration/Illustration70_Render6.png', alt: 'Illustration Render' },
+    { src: '/img/illustration/Esther_Final__2.png', alt: 'Esther' },
+    { src: '/img/Olivia/Olivia-7.png', alt: 'Olivia Final Render' },
+    { src: '/img/illustration/Illustration_14.4.png', alt: 'Illustration 14' },
+    { src: '/img/illustration/Umbrall_valentines.png', alt: 'Umbrall Valentines' },
 ]);
-
 const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 const items = ref([
-    { label: 'Home',     icon: 'pi pi-home',     command: () => scrollToSection('home')     },
-    { label: 'Works',    icon: 'pi pi-star',     command: () => scrollToSection('works')    },
-    { label: 'Services', icon: 'pi pi-search',   command: () => scrollToSection('services') },
-    { label: 'Contact',  icon: 'pi pi-envelope', command: () => scrollToSection('contact')  }
+    { label: 'Home', icon: 'pi pi-home', command: () => scrollToSection('home') },
+    { label: 'Works', icon: 'pi pi-star', command: () => scrollToSection('works') },
+    { label: 'Services', icon: 'pi pi-search', command: () => scrollToSection('services') },
+    { label: 'Contact', icon: 'pi pi-envelope', command: () => scrollToSection('contact') }
 ]);
 
 const isLoading = ref(true);
@@ -523,8 +528,7 @@ const handleGalleryClick = (index) => {
 
 </script>
 
-<style >
-
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 
@@ -765,7 +769,7 @@ const handleGalleryClick = (index) => {
     --text-on-light:  #0a1614; */
 
     /*  Frost */
-/* --60-primary:     #0d1117;
+    /* --60-primary:     #0d1117;
 --60-secondary:   #161b22;
 --30-primary:     #dce8f5;
 --30-secondary:   #eef4fb;
@@ -778,8 +782,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #486080;
 --text-on-light:  #0d1117; */
 
-/*  Coral Reef */
-/* --60-primary:     #140c0a;
+    /*  Coral Reef */
+    /* --60-primary:     #140c0a;
 --60-secondary:   #201410;
 --30-primary:     #fce8e0;
 --30-secondary:   #fef4f0;
@@ -792,8 +796,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #886858;
 --text-on-light:  #140c0a; */
 
-/* Blueberry */
-/* --60-primary:     #0a0d1a;
+    /* Blueberry */
+    /* --60-primary:     #0a0d1a;
 --60-secondary:   #12162a;
 --30-primary:     #e0e4f8;
 --30-secondary:   #f0f2fd;
@@ -806,8 +810,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #5868a0;
 --text-on-light:  #0a0d1a; */
 
-/*  Palm Beach */
-/* --60-primary:     #081410;
+    /*  Palm Beach */
+    /* --60-primary:     #081410;
 --60-secondary:   #0e2018;
 --30-primary:     #d8f0e4;
 --30-secondary:   #ecfaf2;
@@ -820,8 +824,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #407858;
 --text-on-light:  #081410; */
 
-/*  Candlelight */
-/* --60-primary:     #14100a;
+    /*  Candlelight */
+    /* --60-primary:     #14100a;
 --60-secondary:   #201a10;
 --30-primary:     #f8f0dc;
 --30-secondary:   #fdfaee;
@@ -834,8 +838,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #887040;
 --text-on-light:  #14100a; */
 
-/*  Soap */
-/* --60-primary:     #10101a;
+    /*  Soap */
+    /* --60-primary:     #10101a;
 --60-secondary:   #18182a;
 --30-primary:     #e8e8f8;
 --30-secondary:   #f4f4fd;
@@ -848,8 +852,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #707098;
 --text-on-light:  #10101a; */
 
-/*  Cherry */
-/* --60-primary:     #130810;
+    /*  Cherry */
+    /* --60-primary:     #130810;
 --60-secondary:   #200e18;
 --30-primary:     #fce8f0;
 --30-secondary:   #fef4f8;
@@ -862,8 +866,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #885060;
 --text-on-light:  #130810; */
 
-/*  Wheat Field */
-/* --60-primary:     #16120a;
+    /*  Wheat Field */
+    /* --60-primary:     #16120a;
 --60-secondary:   #241c10;
 --30-primary:     #f5eed8;
 --30-secondary:   #fdfaee;
@@ -876,8 +880,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #786040;
 --text-on-light:  #16120a; */
 
-/* Eclipse */
-/* --60-primary:     #080808;
+    /* Eclipse */
+    /* --60-primary:     #080808;
 --60-secondary:   #121212;
 --30-primary:     #e8e0d8;
 --30-secondary:   #f5f0e8;
@@ -890,8 +894,8 @@ const handleGalleryClick = (index) => {
 --text-faint:     #706850;
 --text-on-light:  #080808; */
 
-/*  Edo */
-/* --60-primary:     #100c14;
+    /*  Edo */
+    /* --60-primary:     #100c14;
 --60-secondary:   #1a1420;
 --30-primary:     #f0e8f8;
 --30-secondary:   #f8f4fd;
@@ -904,28 +908,31 @@ const handleGalleryClick = (index) => {
 --text-faint:     #886898;
 --text-on-light:  #100c14; */
 
-/* Indigo Parchment */
---60-primary:     #0A0840;
---60-secondary:   #170C79;
---60-tertiary:    #1E10A0;
---30-primary:     #E8EAF5;
---30-secondary:   #F0F2FA;
---30-border:      #C0C4E0;
---30-border-dark: #170C79;
---10-primary:     #56B6C6;
---10-secondary:   #8ACBD0;
---10-hover:       #3DA0B0;
---text-bright:    #F0F2FA;
---text-muted:     #A8D4DA;
---text-faint:     #6B9CA8;
---text-on-light:  #0A0840;
+    /* Indigo Parchment */
+    --60-primary: #0A0840;
+    --60-secondary: #170C79;
+    --60-tertiary: #1E10A0;
+    --30-primary: #E8EAF5;
+    --30-secondary: #F0F2FA;
+    --30-border: #C0C4E0;
+    --30-border-dark: #170C79;
+    --10-primary: #56B6C6;
+    --10-secondary: #8ACBD0;
+    --10-hover: #3DA0B0;
+    --text-bright: #F0F2FA;
+    --text-muted: #A8D4DA;
+    --text-faint: #6B9CA8;
+    --text-on-light: #0A0840;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -940,10 +947,21 @@ html, body {
 /* ============================================================
    BASE
    ============================================================ */
-* { font-family: 'Poppins', sans-serif; }
+* {
+    font-family: 'Poppins', sans-serif;
+}
 
-:global(body), :global(html) { margin: 0; padding: 0; overflow-x: hidden; }
-:global(#app) { margin: 0; padding: 0; }
+:global(body),
+:global(html) {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+:global(#app) {
+    margin: 0;
+    padding: 0;
+}
 
 /* ============================================================
    LOADER
@@ -974,11 +992,22 @@ html, body {
     gap: 1rem;
 }
 
-.loader-logo { animation: loaderPulse 1.5s ease-in-out infinite; }
+.loader-logo {
+    animation: loaderPulse 1.5s ease-in-out infinite;
+}
 
 @keyframes loaderPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.6; transform: scale(0.95); }
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(0.95);
+    }
 }
 
 .loader-studio-name {
@@ -1007,9 +1036,17 @@ html, body {
 }
 
 @keyframes brushFill {
-    0%   { width: 0%; }
-    60%  { width: 80%; }
-    100% { width: 100%; }
+    0% {
+        width: 0%;
+    }
+
+    60% {
+        width: 80%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 .loader-tagline {
@@ -1021,8 +1058,15 @@ html, body {
 }
 
 @keyframes loaderBlink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
 }
 
 /* ============================================================
@@ -1050,7 +1094,7 @@ html, body {
 }
 
 .p-menubar .p-menubar-item-link,
-.p-menubar .p-menubar-item > .p-menubar-item-content {
+.p-menubar .p-menubar-item>.p-menubar-item-content {
     color: var(--text-bright) !important;
     letter-spacing: 0.05em;
     font-size: 0.85rem;
@@ -1084,7 +1128,7 @@ html, body {
 .work-modal .p-dialog {
     border: none !important;
     border-radius: 4px;
-    
+
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
     padding: 0 !important;
 }
@@ -1095,9 +1139,10 @@ html, body {
     overflow: hidden;
 }
 
-.work-modal .p-dialog > .p-dialog-content {
+.work-modal .p-dialog>.p-dialog-content {
     padding: 0 !important;
 }
+
 /* ============================================================
    THEME EDITOR PANEL
    ============================================================ */
@@ -1117,7 +1162,9 @@ html, body {
     transition: transform 0.3s ease
 }
 
-.theme-editor-panel.theme-panel-open { transform: translateX(0); }
+.theme-editor-panel.theme-panel-open {
+    transform: translateX(0);
+}
 
 .theme-toggle-btn {
     background: transparent;
@@ -1135,7 +1182,9 @@ html, body {
     font-family: 'Poppins', sans-serif;
 }
 
-.theme-toggle-btn:hover { color: var(--10-primary); }
+.theme-toggle-btn:hover {
+    color: var(--10-primary);
+}
 
 .theme-content {
     padding: 1.5rem;
@@ -1169,12 +1218,35 @@ html, body {
     transition: all 0.2s ease;
 }
 
-.preset-btn:hover { border-color: var(--10-primary); background: var(--30-primary); }
+.preset-btn:hover {
+    border-color: var(--10-primary);
+    background: var(--30-primary);
+}
 
-.color-inputs { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
-.color-input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-.color-input-group label { font-size: 0.85rem; font-weight: 600; color: var(--60-primary); }
-.color-picker-group { display: flex; gap: 0.5rem; align-items: center; }
+.color-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.color-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.color-input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--60-primary);
+}
+
+.color-picker-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
 
 .color-input {
     width: 50px;
@@ -1185,7 +1257,11 @@ html, body {
     background: transparent;
 }
 
-.color-value { font-size: 0.85rem; font-family: monospace; color: var(--text-muted); }
+.color-value {
+    font-size: 0.85rem;
+    font-family: monospace;
+    color: var(--text-muted);
+}
 
 .reset-btn {
     width: 100%;
@@ -1200,7 +1276,10 @@ html, body {
     transition: all 0.2s ease;
 }
 
-.reset-btn:hover { background: var(--30-primary); border-color: var(--10-primary); }
+.reset-btn:hover {
+    background: var(--30-primary);
+    border-color: var(--10-primary);
+}
 
 
 
@@ -1221,8 +1300,10 @@ html, body {
 
 .hero-brush {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
 }
 
@@ -1265,9 +1346,17 @@ html, body {
     font-family: 'Poppins', sans-serif;
 }
 
-.hero-headline .line:nth-child(1) { animation: heroFadeUp 0.65s ease 0.25s forwards; }
-.hero-headline .line:nth-child(2) { animation: heroFadeUp 0.65s ease 0.40s forwards; }
-.hero-headline .line:nth-child(3) { animation: heroFadeUp 0.65s ease 0.55s forwards; }
+.hero-headline .line:nth-child(1) {
+    animation: heroFadeUp 0.65s ease 0.25s forwards;
+}
+
+.hero-headline .line:nth-child(2) {
+    animation: heroFadeUp 0.65s ease 0.40s forwards;
+}
+
+.hero-headline .line:nth-child(3) {
+    animation: heroFadeUp 0.65s ease 0.55s forwards;
+}
 
 .hero-headline .accent {
     color: var(--10-primary);
@@ -1278,7 +1367,8 @@ html, body {
 .hero-headline .accent::after {
     content: '';
     position: absolute;
-    bottom: 2px; left: 0;
+    bottom: 2px;
+    left: 0;
     width: 0;
     height: 2px;
     background: var(--10-primary);
@@ -1297,8 +1387,18 @@ html, body {
     animation: heroFadeUp 0.6s ease 0.75s forwards;
 }
 
-@keyframes heroFadeUp { to { opacity: 1; transform: translateY(0); } }
-@keyframes heroUnderline { to { width: 100%; } }
+@keyframes heroFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroUnderline {
+    to {
+        width: 100%;
+    }
+}
 
 /* ============================================================
    GALLERY
@@ -1320,8 +1420,13 @@ html, body {
     cursor: grab;
 }
 
-.gallery-scroll-track::-webkit-scrollbar { display: none; }
-.gallery-scroll-track:active { cursor: grabbing; }
+.gallery-scroll-track::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-scroll-track:active {
+    cursor: grabbing;
+}
 
 .gallery-scroll-item {
     flex: 0 0 420px;
@@ -1332,7 +1437,9 @@ html, body {
     cursor: pointer;
 }
 
-.gallery-scroll-item.active { flex: 0 0 640px; }
+.gallery-scroll-item.active {
+    flex: 0 0 640px;
+}
 
 .gallery-scroll-item img {
     width: 100%;
@@ -1343,9 +1450,18 @@ html, body {
     display: block;
 }
 
-.gallery-scroll-item.active img { filter: brightness(1); }
-.gallery-scroll-item:hover img { transform: scale(1.04); filter: brightness(0.85); }
-.gallery-scroll-item.active:hover img { filter: brightness(1); }
+.gallery-scroll-item.active img {
+    filter: brightness(1);
+}
+
+.gallery-scroll-item:hover img {
+    transform: scale(1.04);
+    filter: brightness(0.85);
+}
+
+.gallery-scroll-item.active:hover img {
+    filter: brightness(1);
+}
 
 
 
@@ -1410,17 +1526,19 @@ html, body {
 }
 
 .masonry-item {
-    height: 480px;   /* taller for portrait art */
+    height: 480px;
+    /* taller for portrait art */
 }
 
 .masonry-item.wide {
     grid-column: span 2;
-    height: 480px;   /* keep same height */
+    height: 480px;
+    /* keep same height */
 }
 
 .masonry-item:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     border-color: var(--10-primary);
 }
 
@@ -1436,14 +1554,18 @@ html, body {
     object-fit: cover;
     transition: transform 0.5s ease;
 }
+
 .masonry-item:hover .work-image {
     transform: scale(1.03);
 }
 
 .work-overlay {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(28,26,23,0.82);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(28, 26, 23, 0.82);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1452,22 +1574,37 @@ html, body {
     transition: opacity 0.35s ease;
     padding: 1rem;
     text-align: center;
-    pointer-events: none;   /* ← add this */
+    pointer-events: none;
+    /* ← add this */
 }
 
 .masonry-item {
     position: relative;
     overflow: hidden;
     border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
     border: 1px solid var(--30-border);
     height: 480px;
 }
 
-.work-title { color: var(--text-bright); font-size: 1.1rem; font-weight: 600; margin: 0 0 0.4rem 0; letter-spacing: 0.02em; }
-.work-category { color: var(--10-primary); font-size: 0.8rem; margin: 0; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+.work-title {
+    color: var(--text-bright);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem 0;
+    letter-spacing: 0.02em;
+}
+
+.work-category {
+    color: var(--10-primary);
+    font-size: 0.8rem;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
 
 
 /* ============================================================
@@ -1487,7 +1624,9 @@ html, body {
     overflow: hidden;
 }
 
-.work-modal :deep(.p-dialog > .p-dialog-content) { padding: 0 !important; }
+.work-modal :deep(.p-dialog > .p-dialog-content) {
+    padding: 0 !important;
+}
 
 .modal-content {
     position: relative;
@@ -1497,14 +1636,16 @@ html, body {
     width: fit-content;
     max-width: 90vw;
     max-height: 90vh;
-    overflow: hidden;        /* clip everything inside */
+    overflow: hidden;
+    /* clip everything inside */
 }
 
 .modal-image {
     width: auto;
     height: auto;
     max-width: 90vw;
-    max-height: calc(90vh - 60px);   /* reserve space for info bar */
+    max-height: calc(90vh - 60px);
+    /* reserve space for info bar */
     display: block;
     object-fit: contain;
 }
@@ -1529,7 +1670,9 @@ html, body {
     transition: background 0.2s ease;
 }
 
-.modal-close-btn:hover { background: rgba(200, 169, 110, 0.8); }
+.modal-close-btn:hover {
+    background: rgba(200, 169, 110, 0.8);
+}
 
 .modal-info {
     padding: 0.75rem 1rem;
@@ -1591,26 +1734,82 @@ html, body {
     flex-direction: column;
     gap: 1.5rem;
     position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.tier-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); border-color: var(--10-primary); }
+.tier-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--10-primary);
+}
 
 .tier-card.featured {
     border: 2px solid var(--10-primary);
     background: #ffffff;
-    box-shadow: 0 8px 24px rgba(200,169,110,0.2);
+    box-shadow: 0 8px 24px rgba(200, 169, 110, 0.2);
 }
 
-.tier-card.featured:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(200,169,110,0.25); }
+.tier-card.featured:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(200, 169, 110, 0.25);
+}
 
-.tier-badge { position: absolute; top: -12px; right: 20px; background: var(--10-primary); color: #ffffff; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; }
-.tier-name { font-size: 1.3rem; font-weight: 600; text-align: center; margin: 0; color: var(--60-primary); letter-spacing: 0.02em; text-transform: uppercase; }
-.tier-price { display: flex; align-items: center; justify-content: center; gap: 0.25rem; font-size: 2.5rem; font-weight: 700; }
-.currency { font-size: 1.5rem; color: var(--text-muted); }
-.amount { color: var(--10-primary); }
-.tier-divider { border: none; height: 1px; background: var(--30-border); margin: 0.5rem 0; }
-.tier-desc { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); margin: 0; text-align: left; flex: 1; }
+.tier-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--10-primary);
+    color: #ffffff;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.tier-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    color: var(--60-primary);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.tier-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.currency {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.amount {
+    color: var(--10-primary);
+}
+
+.tier-divider {
+    border: none;
+    height: 1px;
+    background: var(--30-border);
+    margin: 0.5rem 0;
+}
+
+.tier-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+    flex: 1;
+}
 
 .tier-button {
     margin-top: auto;
@@ -1630,7 +1829,10 @@ html, body {
     transition: background 0.2s ease, color 0.2s ease !important;
 }
 
-:deep(.tier-button.p-button:hover) { background: var(--10-primary) !important; color: #ffffff !important; }
+:deep(.tier-button.p-button:hover) {
+    background: var(--10-primary) !important;
+    color: #ffffff !important;
+}
 
 /* ============================================================
    CONTACT SECTION
@@ -1643,10 +1845,34 @@ html, body {
     scroll-margin-top: 100px;
 }
 
-.contact-container { max-width: 700px; margin: 0 auto; }
-.contact-title { font-size: 2rem; font-weight: 600; text-align: center; margin: 0 0 0.5rem 0; color: var(--text-bright); letter-spacing: -0.01em; }
-.contact-subtitle { text-align: center; font-size: 0.95rem; color: var(--text-muted); margin: 0 0 2rem 0; font-weight: 300; letter-spacing: 0.02em; }
-.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-bright);
+    letter-spacing: -0.01em;
+}
+
+.contact-subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0 0 2rem 0;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
 .form-grid {
     display: grid;
@@ -1654,9 +1880,23 @@ html, body {
     gap: 1rem;
 }
 
-.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-.form-group.full-width { grid-column: 1 / -1; }
-.form-label { font-weight: 500; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
 
 .form-input {
     padding: 0.75rem 1rem;
@@ -1672,8 +1912,15 @@ html, body {
     box-sizing: border-box;
 }
 
-.form-input::placeholder { color: var(--text-faint); }
-.form-input:focus { outline: none; border-bottom-color: var(--10-primary); box-shadow: none; }
+.form-input::placeholder {
+    color: var(--text-faint);
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom-color: var(--10-primary);
+    box-shadow: none;
+}
 
 .form-select {
     appearance: none;
@@ -1685,7 +1932,10 @@ html, body {
     cursor: pointer;
 }
 
-.form-select option { background: var(--60-secondary); color: var(--text-bright); }
+.form-select option {
+    background: var(--60-secondary);
+    color: var(--text-bright);
+}
 
 .form-textarea {
     padding: 0.75rem 1rem;
@@ -1702,8 +1952,15 @@ html, body {
     box-sizing: border-box;
 }
 
-.form-textarea::placeholder { color: var(--text-faint); }
-.form-textarea:focus { outline: none; border-bottom-color: var(--10-primary); box-shadow: none; }
+.form-textarea::placeholder {
+    color: var(--text-faint);
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-bottom-color: var(--10-primary);
+    box-shadow: none;
+}
 
 .submit-button {
     margin-top: 1rem;
@@ -1721,7 +1978,9 @@ html, body {
     transition: background 0.3s ease !important;
 }
 
-.submit-button:hover { background: var(--10-hover) !important; }
+.submit-button:hover {
+    background: var(--10-hover) !important;
+}
 
 
 
@@ -1735,7 +1994,11 @@ html, body {
     padding: 2.5rem 0 1.5rem;
 }
 
-.footer-container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+.footer-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
 
 .footer-content {
     display: flex;
@@ -1746,15 +2009,54 @@ html, body {
     margin-bottom: 1.5rem;
 }
 
-.footer-section h3 { font-size: 0.9rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
-.footer-section address { font-style: normal; }
-.footer-section p, .footer-section address p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.8; margin: 0; }
+.footer-section h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
 
-.footer-email { display: inline-block; margin-top: 0.5rem; font-size: 0.875rem; color: var(--10-primary); text-decoration: none; transition: color 0.2s ease; }
-.footer-email:hover { color: var(--10-hover); text-decoration: underline; }
+.footer-section address {
+    font-style: normal;
+}
 
-.footer-social h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.75rem; }
-.social-links { display: flex; gap: 8px; }
+.footer-section p,
+.footer-section address p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin: 0;
+}
+
+.footer-email {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--10-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-email:hover {
+    color: var(--10-hover);
+    text-decoration: underline;
+}
+
+.footer-social h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 8px;
+}
 
 .social-btn {
     display: flex;
@@ -1769,7 +2071,11 @@ html, body {
     transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.social-btn:hover { background: var(--10-primary); border-color: var(--10-primary); color: #ffffff; }
+.social-btn:hover {
+    background: var(--10-primary);
+    border-color: var(--10-primary);
+    color: #ffffff;
+}
 
 .footer-bottom {
     border-top: 1px solid var(--30-border-dark);
@@ -1781,37 +2087,108 @@ html, body {
     gap: 1rem;
 }
 
-.footer-bottom-left { display: flex; flex-direction: column; gap: 4px; }
-.footer-bottom-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.footer-bottom-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 
-.footer-credit-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin: 0; }
-.footer-credit-block { display: flex; align-items: center; gap: 0.5rem; }
-.footer-credit-name { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.03em; }
-.footer-credit-divider { font-size: 0.75rem; color: var(--30-border-dark); }
-.footer-credit-link { font-size: 0.75rem; color: var(--text-faint); text-decoration: none; transition: color 0.2s ease; }
-.footer-credit-link:hover { color: var(--10-primary); }
+.footer-bottom-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
 
-.copyright, .ai-disclaimer { font-size: 0.75rem; color: var(--text-faint); margin: 0; letter-spacing: 0.02em; }
+.footer-credit-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    margin: 0;
+}
+
+.footer-credit-block {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-credit-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+}
+
+.footer-credit-divider {
+    font-size: 0.75rem;
+    color: var(--30-border-dark);
+}
+
+.footer-credit-link {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-credit-link:hover {
+    color: var(--10-primary);
+}
+
+.copyright,
+.ai-disclaimer {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    margin: 0;
+    letter-spacing: 0.02em;
+}
 
 @media (max-width: 768px) {
+
     /* Theme */
-    .theme-editor-panel { width: 100%; }
+    .theme-editor-panel {
+        width: 100%;
+    }
 
     /* Gallery */
-    .gallery-scroll-item { flex: 0 0 280px; height: 340px; }
-    .gallery-scroll-item.active { flex: 0 0 360px; }
+    .gallery-scroll-item {
+        flex: 0 0 280px;
+        height: 340px;
+    }
+
+    .gallery-scroll-item.active {
+        flex: 0 0 360px;
+    }
 
     /* Works */
-    .works-title { font-size: 1.5rem; }
+    .works-title {
+        font-size: 1.5rem;
+    }
 
     /* Contact */
-    .contact-section { padding: 2rem 1rem; }
-    .contact-title { font-size: 1.5rem; }
-    .form-grid { grid-template-columns: 1fr; }
+    .contact-section {
+        padding: 2rem 1rem;
+    }
+
+    .contact-title {
+        font-size: 1.5rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 
     /* Footer */
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
-    .footer-bottom-right { align-items: flex-start; }
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-bottom-right {
+        align-items: flex-start;
+    }
 }
 
 /* ============================================================
@@ -1847,6 +2224,7 @@ html, body {
         height: 280px;
     }
 }
+
 .gallery-container {
     width: 100%;
     background: var(--60-primary);
@@ -1881,8 +2259,13 @@ html, body {
     color: var(--10-primary);
 }
 
-.gallery-btn-left  { left:  1rem; }
-.gallery-btn-right { right: 1rem; }
+.gallery-btn-left {
+    left: 1rem;
+}
+
+.gallery-btn-right {
+    right: 1rem;
+}
 
 .gallery-scroll-track {
     display: flex;
@@ -1891,7 +2274,8 @@ html, body {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    cursor: default; /* remove grab cursor */
+    cursor: default;
+    /* remove grab cursor */
     scroll-snap-type: x mandatory;
 }
 
@@ -1918,7 +2302,8 @@ html, body {
     padding: 0.85rem 3.5rem;
     border: 1px solid var(--10-primary);
     background: var(--60-primary);
-    color: var(--text-bright);   /* white instead of accent color */
+    color: var(--text-bright);
+    /* white instead of accent color */
     font-family: 'Poppins', sans-serif;
     font-size: 0.8rem;
     font-weight: 600;
@@ -1936,6 +2321,7 @@ html, body {
     color: #ffffff;
     border-color: var(--10-primary);
 }
+
 /* ============================================================
    WORK CARD TRANSITION
    ============================================================ */
