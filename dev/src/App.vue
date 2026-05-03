@@ -1,4 +1,4 @@
-<template>
+﻿<template>
 
     <!-- Loading Screen -->
 <div class="loader-overlay" :class="{ 'loader-hidden': !isLoading }">
@@ -152,27 +152,34 @@
         </div>
     </div>
 
-    <!-- Masonry Works Grid -->
-    <div class="works-section" id="works">
-        <h2 class="works-title">Featured Works</h2>
-        <div class="masonry-grid">
-            <div
-                v-for="(work, index) in works"
-                :key="index"
-                class="masonry-item"
-                :class="work.className"
-                @click="openWorkModal(work)"
-            >
-                <div class="work-image-wrapper">
-                    <img :src="work.image" :alt="work.title" class="work-image" />
-                    <div class="work-overlay">
-                        <h3 class="work-title">{{ work.title }}</h3>
-                        <p class="work-category">{{ work.category }}</p>
-                    </div>
+<!-- Masonry Works Grid -->
+<div class="works-section" id="works">
+    <h2 class="works-title">Featured Works</h2>
+    <TransitionGroup name="work-card" tag="div" class="masonry-grid">
+        <div
+            v-for="(work, index) in visibleWorks"
+            :key="work.title"
+            class="masonry-item"
+            :class="work.className"
+            :style="{ transitionDelay: `${(index % 4) * 80}ms` }"
+            @click="openWorkModal(work)"
+        >
+            <div class="work-image-wrapper">
+                <img :src="work.image" :alt="work.title" class="work-image" />
+                <div class="work-overlay">
+                    <h3 class="work-title">{{ work.title }}</h3>
+                    <p class="work-category">{{ work.category }}</p>
                 </div>
             </div>
         </div>
+    </TransitionGroup>
+
+    <div class="load-more-wrapper">
+        <button v-if="hasMore" @click="loadMore" class="load-more-btn">
+            Load More
+        </button>
     </div>
+</div>
 
     <!-- Work Modal Dialog -->
 <Dialog
@@ -180,7 +187,7 @@
     :modal="true"
     :showHeader="false"
     :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-    :style="{ width: '60vw', padding: '0', margin: '0' }"
+    :style="{ width: 'fit-content', maxWidth: '90vw', maxHeight: '90vh', padding: '0', margin: '0' }"
     :pt="{
         content: { style: 'padding: 0; margin: 0;' },
         root: { style: 'padding: 0; overflow: hidden;' }
@@ -316,7 +323,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
 import Menubar from 'primevue/menubar';
 import Button from 'primevue/button';
 import Badge from 'primevue/badge';
@@ -324,6 +330,18 @@ import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import Dialog from 'primevue/dialog';
 
+import { ref, onMounted, computed } from "vue";
+
+// Add after works ref
+const visibleCount = ref(6)
+
+const visibleWorks = computed(() => works.value.slice(0, visibleCount.value))
+
+const loadMore = () => {
+    visibleCount.value += 3
+}
+
+const hasMore = computed(() => visibleCount.value < works.value.length)
 
 
 const activeIndex = ref(0);
@@ -396,16 +414,65 @@ const commissionTiers = ref([
 ]);
 
 const works = ref([
-    { title: 'Character Design',     category: 'Illustration', image: 'https://picsum.photos/seed/anime1/500/500', className: 'tall' },
-    { title: 'Fantasy Artwork',      category: 'Digital Art',  image: 'https://picsum.photos/seed/fantasy1/400/400', className: 'wide' },
-    { title: 'Portrait Study',       category: 'Character',    image: 'https://picsum.photos/seed/portrait1/400/400', className: '' },
-    { title: 'Anime Style',          category: 'Animation',    image: 'https://picsum.photos/seed/anime2/500/500', className: 'tall' },
-    { title: 'Environment Design',   category: 'Concept Art',  image: 'https://picsum.photos/seed/environment1/400/400', className: '' },
-    { title: 'Magical Scene',        category: 'Fantasy',      image: 'https://picsum.photos/seed/magic1/400/500', className: 'wide' },
-    { title: 'Character Expression', category: 'Illustration', image: 'https://picsum.photos/seed/char1/400/400', className: '' },
-    { title: 'Concept Artwork',      category: 'Design',       image: 'https://picsum.photos/seed/concept1/500/400', className: 'wide' },
-    { title: 'Digital Portrait',     category: 'Illustration', image: 'https://picsum.photos/seed/portrait2/400/400', className: '' }
+    // Row 1: [1] [wide=2] [1]
+    { title: 'Olivia - Character Design',   category: 'Illustration',   image: '/img/Olivia/Olivia-1.png',                              className: '' },
+    { title: 'Aztec - Body Study',          category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Body Study.png', className: 'wide' },
+    { title: 'Olivia - Expression Study',   category: 'Digital Art',    image: '/img/Olivia/Olivia-2.png',                              className: '' },
+
+    // Row 2: [1] [1] [wide=2]
+    { title: 'Olivia - Full Body',          category: 'Character',      image: '/img/Olivia/Olivia-3.png',                              className: '' },
+    { title: 'Zani - Character Design',     category: 'Concept Art',    image: '/img/Zani/Zani.png',                                    className: '' },
+    { title: 'Aztec - Color Variations',    category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Color Var.png', className: 'wide' },
+
+    // Row 3: [1] [wide=2] [1]
+    { title: 'Olivia - Pose Variation',     category: 'Animation',      image: '/img/Olivia/Olivia-4.png',                              className: '' },
+    { title: 'Aztec - Facial Expressions',  category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExp.png', className: 'wide' },
+    { title: 'Zani - Expression',           category: 'Illustration',   image: '/img/Zani/Zani-2.png',                                  className: '' },
+
+    // Row 4: [1] [1] [wide=2]
+    { title: 'Olivia - Dynamic Pose',       category: 'Fantasy',        image: '/img/Olivia/Olivia-5.png',                              className: '' },
+    { title: 'Zani - Pose Study',           category: 'Character',      image: '/img/Zani/Zani-3.png',                                  className: '' },
+    { title: 'Aztec - Turnarounds',         category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_TurnArounds.png', className: 'wide' },
+
+    // Row 5: [1] [wide=2] [1]
+    { title: 'Olivia - Detail Study',       category: 'Illustration',   image: '/img/Olivia/Olivia-6.png',                              className: '' },
+    { title: 'Esther - Final',              category: 'Illustration',   image: '/img/illustration/Esther_Final__2.png',                 className: 'wide' },
+    { title: 'Olivia - Final Render',       category: 'Illustration',   image: '/img/Olivia/Olivia-7.png',                              className: '' },
+
+    // Row 6: [1] [1] [wide=2]
+    { title: 'Zani - Detail',              category: 'Character',      image: '/img/Zani/Zani-4.png',                                  className: '' },
+    { title: 'Zani - Final',               category: 'Illustration',   image: '/img/Zani/Zani-5.png',                                  className: '' },
+    { title: 'Illustration Render',        category: 'Illustration',   image: '/img/illustration/Illustration70_Render6.png',           className: 'wide' },
+
+    // Row 7: [1] [wide=2] [1]
+    { title: 'Gold Material Study',        category: 'Material Study', image: '/img/Material Study_Armor/gold.png',                    className: '' },
+    { title: 'Aztec - Staff Design',       category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Staff Design.png', className: 'wide' },
+    { title: 'Gold Variant 2',             category: 'Material Study', image: '/img/Material Study_Armor/gold2.png',                   className: '' },
+
+    // Row 8: [1] [1] [wide=2]
+    { title: 'Metal Study',               category: 'Material Study', image: '/img/Material Study_Armor/metal2.png',                  className: '' },
+    { title: 'Wood Study',                category: 'Material Study', image: '/img/Material Study_Armor/wood.png',                    className: '' },
+    { title: 'Aztec - Pose Sheet',        category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Pose.png', className: 'wide' },
+
+    // Row 9: [1] [wide=2] [1]
+    { title: 'Illustration 14',           category: 'Illustration',   image: '/img/illustration/Illustration_14.4.png',                className: '' },
+    { title: 'Aztec - Final Render',      category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Render.png', className: 'wide' },
+    { title: 'Illustration 19',           category: 'Illustration',   image: '/img/illustration/Illustration_19.4.png',                className: '' },
+
+    // Remaining singles
+    { title: 'Illustration 2',            category: 'Illustration',   image: '/img/illustration/Illustration_2.2.png',                 className: '' },
+    { title: 'Illustration 4',            category: 'Illustration',   image: '/img/illustration/Illustration_4.2.png',                 className: '' },
+    { title: 'Illustration 6',            category: 'Illustration',   image: '/img/illustration/Illustration_6.17.png',                className: '' },
+    { title: 'Illustration 80',           category: 'Illustration',   image: '/img/illustration/Illustration80-Render7.png',           className: '' },
+    { title: 'Umbrall Valentines',        category: 'Illustration',   image: '/img/illustration/Umbrall_valentines.png',               className: '' },
+    { title: 'Gold Variant 3',            category: 'Material Study', image: '/img/Material Study_Armor/gold3.png',                   className: '' },
+    { title: 'Metal Variant 3',           category: 'Material Study', image: '/img/Material Study_Armor/metal3.png',                  className: '' },
+    { title: 'Wood Variant 2',            category: 'Material Study', image: '/img/Material Study_Armor/wood2.png',                   className: '' },
+    { title: 'Aztec - Items',             category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Items.png', className: '' },
+    { title: 'Aztec - Staff Colors',      category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Staff Color Var.png', className: '' },
+    { title: 'Aztec - Expression Study',  category: 'Game Assets',    image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExpStudy.png', className: '' },
 ]);
+
 
 const galleryItems = ref([
     { src: 'https://primefaces.org/cdn/primevue/images/galleria/galleria1.jpg', alt: 'Project 1' },
@@ -698,7 +765,7 @@ const handleGalleryClick = (index) => {
     --text-on-light:  #0a1614; */
 
     /*  Frost */
---60-primary:     #0d1117;
+/* --60-primary:     #0d1117;
 --60-secondary:   #161b22;
 --30-primary:     #dce8f5;
 --30-secondary:   #eef4fb;
@@ -709,7 +776,7 @@ const handleGalleryClick = (index) => {
 --text-bright:    #eef4fb;
 --text-muted:     #7898b8;
 --text-faint:     #486080;
---text-on-light:  #0d1117;
+--text-on-light:  #0d1117; */
 
 /*  Coral Reef */
 /* --60-primary:     #140c0a;
@@ -837,6 +904,21 @@ const handleGalleryClick = (index) => {
 --text-faint:     #886898;
 --text-on-light:  #100c14; */
 
+/* Indigo Parchment */
+--60-primary:     #0A0840;
+--60-secondary:   #170C79;
+--60-tertiary:    #1E10A0;
+--30-primary:     #E8EAF5;
+--30-secondary:   #F0F2FA;
+--30-border:      #C0C4E0;
+--30-border-dark: #170C79;
+--10-primary:     #56B6C6;
+--10-secondary:   #8ACBD0;
+--10-hover:       #3DA0B0;
+--text-bright:    #F0F2FA;
+--text-muted:     #A8D4DA;
+--text-faint:     #6B9CA8;
+--text-on-light:  #0A0840;
 }
 
 *, *::before, *::after {
@@ -1120,16 +1202,14 @@ html, body {
 
 .reset-btn:hover { background: var(--30-primary); border-color: var(--10-primary); }
 
-@media (max-width: 768px) {
-    .theme-editor-panel { width: 100%; }
-}
+
 
 /* ============================================================
    HERO / TAG SECTION
    ============================================================ */
 .tag-section {
     width: 100%;
-    background: var(--60-primary);
+    background: linear-gradient(135deg, var(--60-primary) 0%, #0f0860 100%);
     color: var(--text-bright);
     padding: 5rem 2rem 4rem;
     text-align: center;
@@ -1179,7 +1259,7 @@ html, body {
     font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 700;
     line-height: 1.15;
-    color: var(--text-bright);
+    color: #efe3ca;
     opacity: 0;
     transform: translateY(24px);
     font-family: 'Poppins', sans-serif;
@@ -1208,7 +1288,7 @@ html, body {
 .hero-sub {
     font-size: 0.9rem;
     font-weight: 300;
-    color: var(--text-muted);
+    color: #8acbd0;
     letter-spacing: 0.1em;
     margin: 0 auto;
     max-width: 400px;
@@ -1267,30 +1347,27 @@ html, body {
 .gallery-scroll-item:hover img { transform: scale(1.04); filter: brightness(0.85); }
 .gallery-scroll-item.active:hover img { filter: brightness(1); }
 
-@media (max-width: 768px) {
-    .gallery-scroll-item { flex: 0 0 280px; height: 340px; }
-    .gallery-scroll-item.active { flex: 0 0 360px; }
-}
+
 
 /* ============================================================
    INTRO SECTION
    ============================================================ */
 .intro-section {
     width: 100%;
-    background: var(--30-secondary);
-    color: var(--60-primary);
+    background: var(--60-primary);
+    color: var(--30-secondary);
     padding: 4rem 2rem;
     text-align: center;
     margin-bottom: 0;
-    border-top: 1px solid var(--30-border);
-    border-bottom: 1px solid var(--30-border);
+    border-top: 1px solid var(--10-primary);
+    border-bottom: 1px solid var(--10-primary);
 }
 
 .intro-content h1 {
     font-size: 2.5rem;
     margin: 0 0 1rem 0;
     font-weight: 600;
-    color: var(--60-primary);
+    color: var(--10-primary);
     letter-spacing: -0.01em;
 }
 
@@ -1300,7 +1377,7 @@ html, body {
     max-width: 600px;
     line-height: 1.8;
     font-weight: 300;
-    color: var(--text-muted);
+    color: var(--text-bright);
     letter-spacing: 0.02em;
 }
 
@@ -1326,25 +1403,20 @@ html, body {
 
 .masonry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
     max-width: 1400px;
     margin: 0 auto;
-    grid-auto-rows: 250px;
 }
 
 .masonry-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-    border: 1px solid var(--30-border);
+    height: 480px;   /* taller for portrait art */
 }
 
-.masonry-item.tall { grid-row: span 2; }
-.masonry-item.wide { grid-column: span 2; }
+.masonry-item.wide {
+    grid-column: span 2;
+    height: 480px;   /* keep same height */
+}
 
 .masonry-item:hover {
     transform: translateY(-6px);
@@ -1352,9 +1424,21 @@ html, body {
     border-color: var(--10-primary);
 }
 
-.work-image-wrapper { width: 100%; height: 100%; position: relative; overflow: hidden; }
-.work-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.masonry-item:hover .work-image { transform: scale(1.06); }
+.work-image-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.work-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.masonry-item:hover .work-image {
+    transform: scale(1.03);
+}
 
 .work-overlay {
     position: absolute;
@@ -1368,24 +1452,23 @@ html, body {
     transition: opacity 0.35s ease;
     padding: 1rem;
     text-align: center;
+    pointer-events: none;   /* ← add this */
 }
 
-.masonry-item:hover .work-overlay { opacity: 1; }
+.masonry-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    border: 1px solid var(--30-border);
+    height: 480px;
+}
 
 .work-title { color: var(--text-bright); font-size: 1.1rem; font-weight: 600; margin: 0 0 0.4rem 0; letter-spacing: 0.02em; }
 .work-category { color: var(--10-primary); font-size: 0.8rem; margin: 0; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
 
-@media (max-width: 768px) {
-    .masonry-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; grid-auto-rows: 150px; }
-    .masonry-item.tall { grid-row: span 1; }
-    .masonry-item.wide { grid-column: span 2; }
-    .works-title { font-size: 1.5rem; }
-}
-
-@media (max-width: 480px) {
-    .masonry-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
-    .masonry-item.tall, .masonry-item.wide { grid-column: auto; grid-row: auto; }
-}
 
 /* ============================================================
    WORK MODAL
@@ -1410,8 +1493,20 @@ html, body {
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     border-radius: 4px;
+    width: fit-content;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;        /* clip everything inside */
+}
+
+.modal-image {
+    width: auto;
+    height: auto;
+    max-width: 90vw;
+    max-height: calc(90vh - 60px);   /* reserve space for info bar */
+    display: block;
+    object-fit: contain;
 }
 
 .modal-close-btn {
@@ -1435,13 +1530,6 @@ html, body {
 }
 
 .modal-close-btn:hover { background: rgba(200, 169, 110, 0.8); }
-
-.modal-image {
-    width: 100%;
-    max-height: 70vh;
-    object-fit: cover;
-    display: block;
-}
 
 .modal-info {
     padding: 0.75rem 1rem;
@@ -1510,12 +1598,11 @@ html, body {
 
 .tier-card.featured {
     border: 2px solid var(--10-primary);
-    transform: scale(1.04);
     background: #ffffff;
     box-shadow: 0 8px 24px rgba(200,169,110,0.2);
 }
 
-.tier-card.featured:hover { transform: scale(1.04) translateY(-6px); box-shadow: 0 16px 32px rgba(200,169,110,0.25); }
+.tier-card.featured:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(200,169,110,0.25); }
 
 .tier-badge { position: absolute; top: -12px; right: 20px; background: var(--10-primary); color: #ffffff; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; }
 .tier-name { font-size: 1.3rem; font-weight: 600; text-align: center; margin: 0; color: var(--60-primary); letter-spacing: 0.02em; text-transform: uppercase; }
@@ -1636,11 +1723,8 @@ html, body {
 
 .submit-button:hover { background: var(--10-hover) !important; }
 
-@media (max-width: 768px) {
-    .contact-section { padding: 2rem 1rem; }
-    .contact-title { font-size: 1.5rem; }
-    .form-grid { grid-template-columns: 1fr; }
-}
+
+
 
 /* ============================================================
    FOOTER
@@ -1709,11 +1793,60 @@ html, body {
 
 .copyright, .ai-disclaimer { font-size: 0.75rem; color: var(--text-faint); margin: 0; letter-spacing: 0.02em; }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+    /* Theme */
+    .theme-editor-panel { width: 100%; }
+
+    /* Gallery */
+    .gallery-scroll-item { flex: 0 0 280px; height: 340px; }
+    .gallery-scroll-item.active { flex: 0 0 360px; }
+
+    /* Works */
+    .works-title { font-size: 1.5rem; }
+
+    /* Contact */
+    .contact-section { padding: 2rem 1rem; }
+    .contact-title { font-size: 1.5rem; }
+    .form-grid { grid-template-columns: 1fr; }
+
+    /* Footer */
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     .footer-bottom-right { align-items: flex-start; }
 }
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+    .masonry-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .masonry-item {
+        height: 360px;
+    }
+
+    .masonry-item.wide {
+        grid-column: span 2;
+        height: 360px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .masonry-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .masonry-item,
+    .masonry-item.wide {
+        grid-column: span 2;
+        height: 280px;
+    }
+}
 .gallery-container {
     width: 100%;
     background: var(--60-primary);
@@ -1770,5 +1903,53 @@ html, body {
     transition: flex-basis 0.4s ease;
     cursor: pointer;
     scroll-snap-align: start;
+}
+
+/* ============================================================
+   LOAD MORE
+   ============================================================ */
+.load-more-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.load-more-btn {
+    padding: 0.85rem 3.5rem;
+    border: 1px solid var(--10-primary);
+    background: var(--60-primary);
+    color: var(--text-bright);   /* white instead of accent color */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.load-more-btn:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background: var(--10-primary);
+    color: #ffffff;
+    border-color: var(--10-primary);
+}
+/* ============================================================
+   WORK CARD TRANSITION
+   ============================================================ */
+.work-card-enter-active {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.work-card-enter-from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+}
+
+.work-card-enter-to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 </style>
