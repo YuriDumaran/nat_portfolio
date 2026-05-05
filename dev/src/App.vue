@@ -43,7 +43,7 @@
                         <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
                         <span v-if="item.shortcut"
                             class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{
-                            item.shortcut }}</span>
+                                item.shortcut }}</span>
                         <i v-if="hasSubmenu"
                             :class="['pi pi-angle-down', { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root }]"></i>
                     </a>
@@ -100,25 +100,14 @@
     </div>
     <!-- Hero / Tag Section -->
     <div class="tag-section" id="home">
-        <svg class="hero-brush" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid slice"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M-10 80 Q200 40 400 90 Q600 140 810 70" stroke="#1f2937" stroke-width="60" fill="none"
-                opacity="0.8" />
-
-            <path d="M-10 200 Q150 160 350 210 Q550 255 810 190" stroke="#111827" stroke-width="40" fill="none"
-                opacity="0.6" />
-
-            <circle cx="680" cy="40" r="90" fill="#0f172a" opacity="0.5" />
-            <circle cx="90" cy="250" r="60" fill="#0f172a" opacity="0.4" />
-
-            <path d="M620 10 Q680 60 640 110" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.3" />
-
-            <path d="M60 240 Q30 200 80 170" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.2" />
-
-            <circle cx="680" cy="40" r="90" fill="#221f1b" opacity="0.5" />
-            <circle cx="90" cy="250" r="60" fill="#211e1a" opacity="0.4" />
-
-        </svg>
+    <svg class="hero-bg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="2" fill="#170C79"></circle>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dots)"></rect>
+    </svg>
 
         <div class="hero-eyebrow">
             <span class="hero-eyebrow-line"></span>
@@ -152,40 +141,10 @@
     </div>
 
     <!-- Intro Section -->
-    <div class="intro-section">
-        <div class="intro-content">
-            <h1 style="text-align:center;white-space:pre-wrap;">NK Studio (Nathan K.)</h1>
-            <h2 style="text-align:center;white-space:pre-wrap;">Nathan K. is an independent illustration studio
-                specializing
-                in anime and cartoon-inspired artwork, character design, and custom commissions. The studio focuses on
-                vibrant colors, expressive characters, and stylized visuals tailored for personal and commercial
-                projects.
-            </h2>
-        </div>
-    </div>
+    <NKIntro />
 
-    <!-- Masonry Works Grid -->
-    <div class="works-section" id="works">
-        <h2 class="works-title">Featured Works</h2>
-        <TransitionGroup name="work-card" tag="div" class="masonry-grid">
-            <div v-for="(work, index) in visibleWorks" :key="work.title" class="masonry-item" :class="work.className"
-                :style="{ transitionDelay: `${(index % 4) * 80}ms` }" @click="openWorkModal(work)">
-                <div class="work-image-wrapper">
-                    <img :src="work.image" :alt="work.title" class="work-image" />
-                    <div class="work-overlay">
-                        <h3 class="work-title">{{ work.title }}</h3>
-                        <p class="work-category">{{ work.category }}</p>
-                    </div>
-                </div>
-            </div>
-        </TransitionGroup>
-
-        <div class="load-more-wrapper">
-            <button v-if="hasMore" @click="loadMore" class="load-more-btn">
-                Load More
-            </button>
-        </div>
-    </div>
+    <!-- masonry grid -->
+    <WorksGrid :works="works" @open-work="openWorkModal" />
 
     <!-- Work Modal Dialog -->
     <Dialog v-model:visible="showWorkModal" :modal="true" :showHeader="false"
@@ -282,25 +241,21 @@
                 <div class="footer-section">
                     <h3>Icecream Studio</h3>
                     <p>Nathan K. | Illustration & Design</p>
-                    <address>
-                        <p>something something</p>
-                        <p>sa makati</p>
-                        <p>Metro Manila</p>
-                    </address>
-                    <a href="mailto:hello@lisamaltby.com" class="footer-email">hello@lisamaltby.com</a>
+                    <a href="mailto:nathan@icecreamstudio.com" class="footer-email">nathan@icecreamstudio.com</a>
                 </div>
 
                 <div class="footer-section footer-social">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#" class="social-btn" title="Facebook" aria-label="Facebook"><i
-                                class="pi pi-facebook"></i></a>
-                        <a href="#" class="social-btn" title="LinkedIn" aria-label="LinkedIn"><i
-                                class="pi pi-linkedin"></i></a>
-                        <a href="#" class="social-btn" title="Instagram" aria-label="Instagram"><i
-                                class="pi pi-instagram"></i></a>
-                        <a href="#" class="social-btn" title="X (Twitter)" aria-label="X"><i
-                                class="pi pi-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/nathan-kuan/" class="social-btn" title="LinkedIn"
+                            aria-label="LinkedIn">
+                            <i class="pi pi-linkedin"></i>
+                        </a>
+
+                        <a href="https://www.artstation.com/icecream0w0" class="social-btn" title="ArtStation"
+                            aria-label="ArtStation">
+                            <i class="pi pi-globe"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -328,6 +283,9 @@
 </template>
 
 <script setup>
+import WorksGrid from './components/WorksGrid.vue';
+import SectionDivider from './components/sectionDivider.vue';
+import NKIntro from './components/NKIntro.vue';
 import Menubar from 'primevue/menubar';
 import Button from 'primevue/button';
 import Badge from 'primevue/badge';
@@ -335,19 +293,7 @@ import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import Dialog from 'primevue/dialog';
 
-import { ref, onMounted, computed } from "vue";
-
-// Add after works ref
-const visibleCount = ref(6)
-
-const visibleWorks = computed(() => works.value.slice(0, visibleCount.value))
-
-const loadMore = () => {
-    visibleCount.value += 3
-}
-
-const hasMore = computed(() => visibleCount.value < works.value.length)
-
+import { ref, onMounted } from "vue";
 
 const activeIndex = ref(2);
 const showWorkModal = ref(false);
@@ -420,29 +366,31 @@ const commissionTiers = ref([
 
 const works = ref([
     // Row 1: [1] [wide=2] [1]
-    { title: 'Olivia - Character Design', category: 'Illustration', image: '/img/Olivia/Olivia-1.png', className: '' },
-    { title: 'Aztec - Body Study', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Body Study.png', className: 'wide' },
-    { title: 'Olivia - Expression Study', category: 'Digital Art', image: '/img/Olivia/Olivia-2.png', className: '' },
+    { title: 'Zani - Pose Study', category: 'Character', image: '/img/Zani/Zani-3.png', className: '' },
+    { title: 'Aztec - Color Variations', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Color Var.png', className: 'wide' },
+    { title: 'Illustration 2', category: 'Illustration', image: '/img/illustration/Illustration_2.2.png', className: '' },
 
     // Row 2: [1] [1] [wide=2]
-    { title: 'Olivia - Full Body', category: 'Character', image: '/img/Olivia/Olivia-3.png', className: '' },
-    { title: 'Zani - Character Design', category: 'Concept Art', image: '/img/Zani/Zani.png', className: '' },
-    { title: 'Aztec - Color Variations', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Color Var.png', className: 'wide' },
+    { title: 'Olivia - Final Render', category: 'Illustration', image: '/img/Olivia/Olivia-7.png', className: '' },
+    { title: 'Illustration 19', category: 'Illustration', image: '/img/illustration/Illustration_19.4.png', className: '' },
+    { title: 'Aztec - Facial Expressions', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExp.png', className: 'wide' },
+
 
     // Row 3: [1] [wide=2] [1]
     { title: 'Olivia - Pose Variation', category: 'Animation', image: '/img/Olivia/Olivia-4.png', className: '' },
-    { title: 'Aztec - Facial Expressions', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_FacialExp.png', className: 'wide' },
+    { title: 'Aztec - Color Variations', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Color Var.png', className: 'wide' },
     { title: 'Zani - Expression', category: 'Illustration', image: '/img/Zani/Zani-2.png', className: '' },
 
     // Row 4: [1] [1] [wide=2]
-    { title: 'Olivia - Dynamic Pose', category: 'Fantasy', image: '/img/Olivia/Olivia-5.png', className: '' },
-    { title: 'Zani - Pose Study', category: 'Character', image: '/img/Zani/Zani-3.png', className: '' },
     { title: 'Aztec - Turnarounds', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_TurnArounds.png', className: 'wide' },
+    { title: 'Olivia - Dynamic Pose', category: 'Fantasy', image: '/img/Olivia/Olivia-5.png', className: '' },
+    { title: 'Olivia - Character Design', category: 'Illustration', image: '/img/Olivia/Olivia-1.png', className: '' },
+
 
     // Row 5: [1] [wide=2] [1]
     { title: 'Olivia - Detail Study', category: 'Illustration', image: '/img/Olivia/Olivia-6.png', className: '' },
     { title: 'Esther - Final', category: 'Illustration', image: '/img/illustration/Esther_Final__2.png', className: 'wide' },
-    { title: 'Olivia - Final Render', category: 'Illustration', image: '/img/Olivia/Olivia-7.png', className: '' },
+    { title: 'Olivia - Full Body', category: 'Character', image: '/img/Olivia/Olivia-3.png', className: '' },
 
     // Row 6: [1] [1] [wide=2]
     { title: 'Zani - Detail', category: 'Character', image: '/img/Zani/Zani-4.png', className: '' },
@@ -455,17 +403,18 @@ const works = ref([
     { title: 'Gold Variant 2', category: 'Material Study', image: '/img/Material Study_Armor/gold2.png', className: '' },
 
     // Row 8: [1] [1] [wide=2]
+    { title: 'Aztec - Pose Sheet', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Pose.png', className: 'wide' },
     { title: 'Metal Study', category: 'Material Study', image: '/img/Material Study_Armor/metal2.png', className: '' },
     { title: 'Wood Study', category: 'Material Study', image: '/img/Material Study_Armor/wood.png', className: '' },
-    { title: 'Aztec - Pose Sheet', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Pose.png', className: 'wide' },
+
 
     // Row 9: [1] [wide=2] [1]
     { title: 'Illustration 14', category: 'Illustration', image: '/img/illustration/Illustration_14.4.png', className: '' },
     { title: 'Aztec - Final Render', category: 'Game Assets', image: '/img/Aztec_Game_Assets/Final_Template_AztecTheme_Render.png', className: 'wide' },
-    { title: 'Illustration 19', category: 'Illustration', image: '/img/illustration/Illustration_19.4.png', className: '' },
+    { title: 'Zani - Character Design', category: 'Concept Art', image: '/img/Zani/Zani.png', className: '' },
 
     // Remaining singles
-    { title: 'Illustration 2', category: 'Illustration', image: '/img/illustration/Illustration_2.2.png', className: '' },
+    { title: 'Olivia - Expression Study', category: 'Digital Art', image: '/img/Olivia/Olivia-2.png', className: '' },
     { title: 'Illustration 4', category: 'Illustration', image: '/img/illustration/Illustration_4.2.png', className: '' },
     { title: 'Illustration 6', category: 'Illustration', image: '/img/illustration/Illustration_6.17.png', className: '' },
     { title: 'Illustration 80', category: 'Illustration', image: '/img/illustration/Illustration80-Render7.png', className: '' },
@@ -1298,6 +1247,15 @@ body {
     overflow: hidden;
 }
 
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .hero-brush {
     position: absolute;
     top: 0;
@@ -1509,102 +1467,31 @@ body {
 }
 
 .works-title {
+    font-family: "Playfair Display", serif;
     font-size: 2rem;
-    font-weight: 600;
-    text-align: center;
-    margin: 0 0 3rem 0;
-    color: var(--60-primary);
-    letter-spacing: -0.01em;
-}
-
-.masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    max-width: 1400px;
+    font-weight: 700;
+    color: inherit;
     margin: 0 auto;
-}
-
-.masonry-item {
-    height: 480px;
-    /* taller for portrait art */
-}
-
-.masonry-item.wide {
-    grid-column: span 2;
-    height: 480px;
-    /* keep same height */
-}
-
-.masonry-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-    border-color: var(--10-primary);
-}
-
-.work-image-wrapper {
-    width: 100%;
-    height: 100%;
-}
-
-.work-image {
-    width: 100%;
-    height: 100%;
     display: block;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.masonry-item:hover .work-image {
-    transform: scale(1.03);
-}
-
-.work-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(28, 26, 23, 0.82);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    padding: 1rem;
     text-align: center;
-    pointer-events: none;
-    /* ← add this */
-}
-
-.masonry-item {
     position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-    border: 1px solid var(--30-border);
-    height: 480px;
+    padding-bottom: 6px;
+    margin: 0 0 3rem 0;
 }
 
-.work-title {
-    color: var(--text-bright);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0 0 0.4rem 0;
-    letter-spacing: 0.02em;
+.works-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.2em;
+    height: 2px;
+    background: linear-gradient(90deg, #e85d8a, #a855f7);
+    border-radius: 2px;
 }
 
-.work-category {
-    color: var(--10-primary);
-    font-size: 0.8rem;
-    margin: 0;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
+
 
 
 /* ============================================================
@@ -2195,35 +2082,7 @@ body {
    RESPONSIVE
    ============================================================ */
 
-@media (max-width: 900px) {
-    .masonry-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
 
-    .masonry-item {
-        height: 360px;
-    }
-
-    .masonry-item.wide {
-        grid-column: span 2;
-        height: 360px;
-    }
-}
-
-
-@media (max-width: 480px) {
-    .masonry-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
-    }
-
-    .masonry-item,
-    .masonry-item.wide {
-        grid-column: span 2;
-        height: 280px;
-    }
-}
 
 .gallery-container {
     width: 100%;
@@ -2287,39 +2146,6 @@ body {
     transition: flex-basis 0.4s ease;
     cursor: pointer;
     scroll-snap-align: start;
-}
-
-/* ============================================================
-   LOAD MORE
-   ============================================================ */
-.load-more-wrapper {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1rem;
-}
-
-.load-more-btn {
-    padding: 0.85rem 3.5rem;
-    border: 1px solid var(--10-primary);
-    background: var(--60-primary);
-    color: var(--text-bright);
-    /* white instead of accent color */
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.load-more-btn:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-    background: var(--10-primary);
-    color: #ffffff;
-    border-color: var(--10-primary);
 }
 
 /* ============================================================
