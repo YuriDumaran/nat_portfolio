@@ -99,6 +99,8 @@
         </div>
     </div>
 
+    <GlowStrip />
+
     <!-- Hero / Tag Section -->
     <div class="tag-section" id="home">
         <svg class="hero-bg" xmlns="http://www.w3.org/2000/svg">
@@ -126,20 +128,7 @@
     </div>
 
     <!-- Gallery Slideshow -->
-    <div class="gallery-container">
-        <button class="gallery-btn gallery-btn-left" @click="scrollGallery('left')">
-            <i class="pi pi-chevron-left"></i>
-        </button>
-        <div class="gallery-scroll-track" ref="galleryTrack">
-            <div v-for="(item, index) in galleryItems" :key="index" class="gallery-scroll-item"
-                :class="{ active: activeIndex === index }" @click="handleGalleryClick(index)">
-                <img :src="item.src" :alt="item.alt" />
-            </div>
-        </div>
-        <button class="gallery-btn gallery-btn-right" @click="scrollGallery('right')">
-            <i class="pi pi-chevron-right"></i>
-        </button>
-    </div>
+    <GallerySlideshow />
 
     <!-- Intro Section -->
     <NKIntro />
@@ -185,6 +174,8 @@
             </div>
         </div>
     </div>
+    
+    <GlowStrip />
 
     <!-- Contact Form Section -->
     <div class="contact-section" id="contact">
@@ -298,19 +289,14 @@ import Badge from 'primevue/badge'
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import Dialog from 'primevue/dialog'
-
+import GallerySlideshow from './components/GallerySlideshow.vue'
+import GlowStrip from './components/GlowStrip.vue'
 // ── Portfolio data ────────────────────────────────────────────────────────────
-import { works, galleryItems } from './data/featuredWorks.js'
-// works and galleryItems are plain arrays — no need to wrap in ref()
-// since WorksGrid only reads them and they never change at runtime.
-// If you ever need to add/remove items dynamically, change to:
-//   import { works as worksData, galleryItems as galleryData } from './data/featuredWorks.js'
-//   const works = ref(worksData)
-//   const galleryItems = ref(galleryData)
+import { works } from './data/featuredWorks.js'
+
 
 import { ref, onMounted } from 'vue'
 
-const activeIndex = ref(2)
 const showWorkModal = ref(false)
 const selectedWork = ref(null)
 const showThemePanel = ref(false)
@@ -395,15 +381,6 @@ const items = ref([
 const isLoading = ref(true)
 onMounted(() => { setTimeout(() => { isLoading.value = false }, 2000) })
 
-const galleryTrack = ref(null)
-
-const scrollGallery = (direction) => {
-    const track = galleryTrack.value
-    if (!track) return
-    track.scrollBy({ left: direction === 'left' ? -500 : 500, behavior: 'smooth' })
-}
-
-const handleGalleryClick = (index) => { activeIndex.value = index }
 </script>
 
 <style>

@@ -1,7 +1,18 @@
 <template>
+  <div class="works-glow-strip"></div>
+
   <div class="works-section" id="works">
     <div class="grid-background">
-      <h2 class="works-title">Featured Works</h2>
+      <div class="works-heading">
+        <p class="works-heading-thin">Portfolio</p>
+        <h2 class="works-heading-bold">Featured Works</h2>
+        <div class="works-heading-rule">
+          <span class="works-rule-line"></span>
+          <span class="works-rule-dot"></span>
+          <span class="works-rule-line"></span>
+        </div>
+      </div>
+
       <div class="masonry-grid">
         <div
           v-for="(work, index) in visibleWorks"
@@ -27,6 +38,8 @@
       </div>
     </div>
   </div>
+
+<div class="works-glow-strip"></div>
 </template>
 
 <script setup>
@@ -49,57 +62,83 @@ const openWork = (work) => emit('open-work', work);
 </script>
 
 <style scoped>
+/* ── Glow strip transition ── */
+.works-glow-strip {
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #56B6C6 20%, #8ACBD0 50%, #56B6C6 80%, transparent 100%);
+  position: relative;
+}
+.works-glow-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(6px);
+  opacity: 0.55;
+}
+
+/* ── Section ── */
 .works-section {
   margin: 0;
-  /* FIX: same base color as hero so there's no gap between sections */
-  background: linear-gradient(135deg, #0A0840 0%, #0f0860 100%);
+  background: linear-gradient(160deg, #0d0952 0%, #170C79 100%);
+  scroll-margin-top: 10px;
 }
 
 .grid-background {
   position: relative;
   width: 100%;
-  /* FIX: padding-top ensures dots show right from the top edge, no blank strip */
-  padding-top: 3rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
-  /* FIX: match the hero gradient so the seam is invisible */
-  background: linear-gradient(135deg, #0A0840 0%, #0f0860 100%);
+  background: transparent;
 }
 
-.works-section-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  /* FIX: raised opacity to match hero dot visibility */
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.works-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-bright);
+/* ── Heading ── */
+.works-heading {
   text-align: center;
   margin-bottom: 2rem;
-  position: relative;
-  z-index: 1;
-  /* Matching underline accent from App.vue works-title style */
-  padding-bottom: 6px;
 }
 
-.works-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2.2em;
-  height: 2px;
-  background: linear-gradient(90deg, #e85d8a, #a855f7);
-  border-radius: 2px;
+.works-heading-thin {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(138, 203, 208, 0.6);
+  margin: 0 0 2px 0;
 }
 
+.works-heading-bold {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #EFE3CA;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+.works-heading-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.works-rule-line {
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: rgba(239, 227, 202, 0.2);
+}
+
+.works-rule-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #56B6C6;
+}
+
+/* ── Grid ── */
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -111,15 +150,39 @@ const openWork = (work) => emit('open-work', work);
   padding: 0 1rem;
 }
 
+/* ── Cards ── */
 .masonry-item {
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 6px;
   cursor: pointer;
-  border: 1px solid var(--30-border);
   height: 480px;
+  background: rgba(239, 227, 202, 0.06);
+  border: 1px solid rgba(239, 227, 202, 0.15);
+  transition: transform 0.35s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+/* parchment frosted sheen */
+.masonry-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(239, 227, 202, 0.07) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* teal bottom accent on hover */
+.masonry-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #56B6C6, #8ACBD0);
+  z-index: 3;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
 }
 
 .masonry-item.wide {
@@ -128,11 +191,16 @@ const openWork = (work) => emit('open-work', work);
 }
 
 .masonry-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  border-color: var(--10-primary);
+  transform: translateY(-5px);
+  border-color: rgba(239, 227, 202, 0.32);
+  background: rgba(239, 227, 202, 0.1);
 }
 
+.masonry-item:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Image ── */
 .work-image-wrapper {
   width: 100%;
   height: 100%;
@@ -143,20 +211,20 @@ const openWork = (work) => emit('open-work', work);
   height: 100%;
   display: block;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  filter: brightness(0.8) saturate(0.85);
+  transition: transform 0.5s ease, filter 0.4s ease;
 }
 
 .masonry-item:hover .work-image {
   transform: scale(1.03);
+  filter: brightness(1) saturate(1.05);
 }
 
+/* ── Overlay ── */
 .work-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(28, 26, 23, 0.82);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(13, 9, 82, 0.85);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -166,6 +234,7 @@ const openWork = (work) => emit('open-work', work);
   padding: 1rem;
   text-align: center;
   pointer-events: none;
+  z-index: 2;
 }
 
 .masonry-item:hover .work-overlay {
@@ -173,7 +242,7 @@ const openWork = (work) => emit('open-work', work);
 }
 
 .work-title {
-  color: var(--text-bright);
+  color: #EFE3CA;
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 0.4rem 0;
@@ -181,14 +250,16 @@ const openWork = (work) => emit('open-work', work);
 }
 
 .work-category {
-  color: var(--10-primary);
+  color: #56B6C6;
   font-size: 0.8rem;
   margin: 0;
   font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  opacity: 0.85;
 }
 
+/* ── Load more ── */
 .load-more-wrapper {
   display: flex;
   justify-content: center;
@@ -196,9 +267,9 @@ const openWork = (work) => emit('open-work', work);
 }
 
 .load-more-gradient-wrap {
-  padding: 2px;
+  padding: 1.5px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #e85d8a, #a855f7);
+  background: linear-gradient(90deg, rgba(239,227,202,0.6), rgba(239,227,202,0.2));
   display: inline-block;
 }
 
@@ -209,32 +280,26 @@ const openWork = (work) => emit('open-work', work);
   padding: 9px 28px;
   border-radius: 999px;
   border: none;
-  background: #0A0840;
-  color: #fff;
+  background: #170C79;
+  color: #EFE3CA;
   cursor: pointer;
   display: block;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .load-more-btn:hover {
   background: transparent;
-  color: #fff;
+  color: #EFE3CA;
 }
 
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .masonry-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-
-  .masonry-item {
-    height: 360px;
-  }
-
-  .masonry-item.wide {
-    grid-column: span 2;
-    height: 360px;
-  }
+  .masonry-item        { height: 360px; }
+  .masonry-item.wide   { grid-column: span 2; height: 360px; }
 }
 
 @media (max-width: 480px) {
@@ -242,11 +307,7 @@ const openWork = (work) => emit('open-work', work);
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
   }
-
   .masonry-item,
-  .masonry-item.wide {
-    grid-column: span 2;
-    height: 280px;
-  }
+  .masonry-item.wide { grid-column: span 2; height: 280px; }
 }
 </style>
