@@ -1,19 +1,21 @@
 <template>
   <div class="works-section" id="works">
-    <h2 class="works-title">Featured Works</h2>
-    <div class="masonry-grid">
-      <div
-        v-for="(work, index) in visibleWorks"
-        :key="index"
-        class="masonry-item"
-        :class="work.className"
-        @click="openWork(work)"
-      >
-        <div class="work-image-wrapper">
-          <img :src="work.image" :alt="work.title" class="work-image" />
-          <div class="work-overlay">
-            <h3 class="work-title">{{ work.title }}</h3>
-            <p class="work-category">{{ work.category }}</p>
+    <div class="grid-background">
+      <h2 class="works-title">Featured Works</h2>
+      <div class="masonry-grid">
+        <div
+          v-for="(work, index) in visibleWorks"
+          :key="index"
+          class="masonry-item"
+          :class="work.className"
+          @click="openWork(work)"
+        >
+          <div class="work-image-wrapper">
+            <img :src="work.image" :alt="work.title" class="work-image" />
+            <div class="work-overlay">
+              <h3 class="work-title">{{ work.title }}</h3>
+              <p class="work-category">{{ work.category }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +51,29 @@ const openWork = (work) => emit('open-work', work);
 <style scoped>
 .works-section {
   margin: 0;
+  /* FIX: same base color as hero so there's no gap between sections */
+  background: linear-gradient(135deg, #0A0840 0%, #0f0860 100%);
+}
+
+.grid-background {
+  position: relative;
+  width: 100%;
+  /* FIX: padding-top ensures dots show right from the top edge, no blank strip */
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+  /* FIX: match the hero gradient so the seam is invisible */
+  background: linear-gradient(135deg, #0A0840 0%, #0f0860 100%);
+}
+
+.works-section-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* FIX: raised opacity to match hero dot visibility */
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .works-title {
@@ -57,6 +82,22 @@ const openWork = (work) => emit('open-work', work);
   color: var(--text-bright);
   text-align: center;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+  /* Matching underline accent from App.vue works-title style */
+  padding-bottom: 6px;
+}
+
+.works-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.2em;
+  height: 2px;
+  background: linear-gradient(90deg, #e85d8a, #a855f7);
+  border-radius: 2px;
 }
 
 .masonry-grid {
@@ -65,6 +106,9 @@ const openWork = (work) => emit('open-work', work);
   gap: 1rem;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
 }
 
 .masonry-item {
@@ -148,7 +192,7 @@ const openWork = (work) => emit('open-work', work);
 .load-more-wrapper {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
+  padding: 2rem 0;
 }
 
 .load-more-gradient-wrap {
@@ -159,14 +203,14 @@ const openWork = (work) => emit('open-work', work);
 }
 
 .load-more-btn {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 13px;
   letter-spacing: 0.08em;
   padding: 9px 28px;
   border-radius: 999px;
   border: none;
-  background: var(--color-background-primary, #fff);
-  color: var(--color-text-primary, #111);
+  background: #0A0840;
+  color: #fff;
   cursor: pointer;
   display: block;
   transition: background 0.2s, color 0.2s;

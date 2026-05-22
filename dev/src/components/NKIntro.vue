@@ -3,11 +3,12 @@
 
     <svg class="hero-bg" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <pattern id="dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="2" fill="#170C79"></circle>
+        <!-- FIX: unique id "intro-dots" — no conflict with hero or works -->
+        <pattern id="intro-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1.5" fill="#3730a3" opacity="0.7"></circle>
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#dots)"></rect>
+      <rect width="100%" height="100%" fill="url(#intro-dots)"></rect>
     </svg>
 
     <div class="hero-left">
@@ -15,12 +16,10 @@
       <h1 class="hero-title">NK Studio</h1>
       <p class="hero-subtitle">Nathan K.</p>
 
-      <!-- Availability Indicator -->
       <div class="availability-badge">
         <span class="availability-dot"></span> <span>Open for Work</span>
       </div>
 
-      <!-- add open for commissions -->
       <div class="availability-badge">
         <span class="availability-dot"></span> <span>Open for Commissions</span>
       </div>
@@ -43,9 +42,6 @@
 
     <div class="hero-right">
       <div class="artwork-frame">
-        <!-- Swap placeholder with your image:
-             <img src="/your-image.png" alt="Featured artwork" class="artwork-img" />
-        -->
         <div class="artwork-placeholder">
           <div class="artwork-placeholder-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#56B6C6" stroke-width="1.5">
@@ -69,63 +65,15 @@
 <script setup>
 const tags = ["Character Design", "Anime Art", "Commissions", "Commercial"];
 const featuredTitle = "Original Character · 2024";
-
 </script>
-
-
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700&family=DM+Sans:wght@300;400&display=swap");
 
-/* ── Availability Badge ── */
-.availability-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 1.5rem;
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin-right: 10px;
-
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-
-  background: rgba(86, 182, 198, 0.12);
-  border: 1px solid #56B6C6;
-  color: #56B6C6;
-
-  opacity: 0;
-  animation: fadeUp 0.6s ease forwards 0.4s;
-}
-
-/* animated status dot */
-.availability-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #56B6C6;
-  position: relative;
-}
-
-.availability-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: #56B6C6;
-  animation: pulse 1.8s infinite;
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1); opacity: 0.8; }
-  70%  { transform: scale(2.2); opacity: 0; }
-  100% { opacity: 0; }
-}
-
 /* ── Layout ── */
+/* FIX: gradient matches hero + WorksGrid exactly — seamless dot continuity */
 .hero {
-  background: #0A0840;
+  background: linear-gradient(135deg, #0A0840 0%, #0f0860 100%);
   border-radius: 0;
   padding: 5rem 4rem;
   display: grid;
@@ -135,16 +83,20 @@ const featuredTitle = "Original Character · 2024";
   min-height: 560px;
   position: relative;
   overflow: hidden;
+  /* FIX: no margin, no border — sits flush between gallery and works */
+  margin: 0;
 }
 
 /* ── Dot background ── */
+/* FIX: same opacity + size as hero and WorksGrid */
 .hero-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.6;
+  opacity: 0.55;
   pointer-events: none;
+  z-index: 0;
 }
 
 /* ── Background glows ── */
@@ -170,6 +122,48 @@ const featuredTitle = "Original Character · 2024";
   border-radius: 50%;
   background: radial-gradient(circle, rgba(23, 12, 121, 0.5) 0%, transparent 70%);
   pointer-events: none;
+}
+
+/* ── Availability Badge ── */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-right: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  background: rgba(86, 182, 198, 0.12);
+  border: 1px solid #56B6C6;
+  color: #56B6C6;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.4s;
+}
+
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #56B6C6;
+  position: relative;
+}
+
+.availability-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #56B6C6;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 0.8; }
+  70%  { transform: scale(2.2); opacity: 0; }
+  100% { opacity: 0; }
 }
 
 /* ── Left column ── */
@@ -198,19 +192,13 @@ const featuredTitle = "Original Character · 2024";
   font-weight: 900;
   line-height: 1.05;
   margin: 0 0 0.25rem;
-  background: linear-gradient(135deg,
-      #e85d8a 0%,
-      #f4a261 40%,
-      #a855f7 80%,
-      #e85d8a 100%);
+  background: linear-gradient(135deg, #e85d8a 0%, #f4a261 40%, #a855f7 80%, #e85d8a 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   opacity: 0;
-  animation:
-    shimmer 5s ease infinite,
-    fadeUp 0.7s ease forwards 0.25s;
+  animation: shimmer 5s ease infinite, fadeUp 0.7s ease forwards 0.25s;
 }
 
 .hero-subtitle {
@@ -218,7 +206,7 @@ const featuredTitle = "Original Character · 2024";
   font-size: clamp(1.3rem, 2.5vw, 1.7rem);
   font-weight: 700;
   font-style: italic;
-  color: #1E10A0;
+  color: #8ACBD0;
   margin: 0 0 1.5rem;
   opacity: 0;
   animation: fadeUp 0.6s ease forwards 0.35s;
@@ -248,13 +236,8 @@ const featuredTitle = "Original Character · 2024";
   border-radius: 50%;
 }
 
-.dot-teal {
-  background: #56B6C6;
-}
-
-.dot-indigo {
-  background: #170C79;
-}
+.dot-teal   { background: #56B6C6; }
+.dot-indigo { background: #170C79; }
 
 /* ── Bio ── */
 .hero-bio {
@@ -325,13 +308,10 @@ const featuredTitle = "Original Character · 2024";
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,
-      rgba(86, 182, 198, 0.06) 0%,
-      rgba(30, 16, 160, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(86, 182, 198, 0.06) 0%, rgba(30, 16, 160, 0.12) 100%);
   pointer-events: none;
 }
 
-/* When using a real image */
 .artwork-img {
   width: 100%;
   height: 100%;
@@ -339,7 +319,6 @@ const featuredTitle = "Original Character · 2024";
   display: block;
 }
 
-/* Placeholder */
 .artwork-placeholder {
   text-align: center;
   position: relative;
@@ -370,7 +349,6 @@ const featuredTitle = "Original Character · 2024";
   margin: 0;
 }
 
-/* ── Badge ── */
 .artwork-badge {
   position: absolute;
   bottom: 16px;
@@ -408,43 +386,22 @@ const featuredTitle = "Original Character · 2024";
     text-align: center;
   }
 
-  .hero-left {
-    max-width: 100%;
-  }
+  .hero-left { max-width: 100%; }
 
   .hero-divider,
-  .hero-tags {
-    justify-content: center;
-  }
+  .hero-tags { justify-content: center; }
 
-  .hero-right {
-    max-width: 280px;
-  }
+  .hero-right { max-width: 280px; }
 }
 
 /* ── Animations ── */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes shimmer {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
 }
 </style>
-
