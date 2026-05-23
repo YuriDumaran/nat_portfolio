@@ -4,23 +4,19 @@
   <div class="works-section" id="works">
     <div class="grid-background">
       <div class="works-heading">
-        <p class="works-heading-thin">Portfolio</p>
-        <h2 class="works-heading-bold">Featured Works</h2>
-        <div class="works-heading-rule">
-          <span class="works-rule-line"></span>
-          <span class="works-rule-dot"></span>
-          <span class="works-rule-line"></span>
+        <span class="works-ghost">WORKS</span>
+        <p class="works-eyebrow">Portfolio</p>
+        <h2 class="works-title">Featured <em>Works</em></h2>
+        <div class="works-dots">
+          <span class="works-dot"></span>
+          <span class="works-dot active"></span>
+          <span class="works-dot"></span>
         </div>
       </div>
 
       <div class="masonry-grid">
-        <div
-          v-for="(work, index) in visibleWorks"
-          :key="index"
-          class="masonry-item"
-          :class="work.className"
-          @click="openWork(work)"
-        >
+        <div v-for="(work, index) in visibleWorks" :key="index" class="masonry-item" :class="work.className"
+          @click="openWork(work)">
           <div class="work-image-wrapper">
             <img :src="work.image" :alt="work.title" class="work-image" />
             <div class="work-overlay">
@@ -33,13 +29,15 @@
     </div>
 
     <div class="load-more-wrapper">
-      <div v-if="hasMore" class="load-more-gradient-wrap">
-        <button @click="loadMore" class="load-more-btn">Load More</button>
-      </div>
+      <button v-if="hasMore" @click="loadMore" class="load-more-btn">
+        <span class="load-more-dot"></span>
+        Load More
+        <span class="load-more-dot"></span>
+      </button>
     </div>
   </div>
 
-<div class="works-glow-strip"></div>
+  <div class="works-glow-strip"></div>
 </template>
 
 <script setup>
@@ -68,6 +66,7 @@ const openWork = (work) => emit('open-work', work);
   background: linear-gradient(90deg, transparent 0%, #56B6C6 20%, #8ACBD0 50%, #56B6C6 80%, transparent 100%);
   position: relative;
 }
+
 .works-glow-strip::after {
   content: '';
   position: absolute;
@@ -81,13 +80,13 @@ const openWork = (work) => emit('open-work', work);
 .works-section {
   margin: 0;
   background: linear-gradient(160deg, #0d0952 0%, #170C79 100%);
-  scroll-margin-top: 10px;
+  scroll-margin-top: 100px;
 }
 
 .grid-background {
   position: relative;
   width: 100%;
-  padding-top: 1rem;
+  padding-top: 3rem;
   padding-bottom: 1rem;
   background: transparent;
 }
@@ -96,46 +95,72 @@ const openWork = (work) => emit('open-work', work);
 .works-heading {
   text-align: center;
   margin-bottom: 2rem;
+  position: relative;
+  padding: 0.5rem 0;
 }
 
-.works-heading-thin {
-  font-size: 0.7rem;
-  font-weight: 300;
+.works-ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(86, 182, 198, 0.15);
+  white-space: nowrap;
+  pointer-events: none;
+  line-height: 1;
+  margin-top: 8px;
+  user-select: none;
+}
+
+.works-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(138, 203, 208, 0.6);
-  margin: 0 0 2px 0;
+  color: rgba(138, 203, 208, 0.7);
+  margin: 0 0 4px 0;
+  position: relative;
 }
 
-.works-heading-bold {
-  font-size: 1.9rem;
-  font-weight: 700;
+.works-title {
+  font-size: 2.2rem;
+  font-weight: 800;
   color: #EFE3CA;
   letter-spacing: -0.02em;
   line-height: 1;
   margin: 0;
+  position: relative;
 }
 
-.works-heading-rule {
+.works-title em {
+  color: #56B6C6;
+  font-style: normal;
+}
+
+.works-dots {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 5px;
+  margin-top: 10px;
+  position: relative;
 }
 
-.works-rule-line {
-  flex: 1;
-  max-width: 60px;
-  height: 1px;
-  background: rgba(239, 227, 202, 0.2);
-}
-
-.works-rule-dot {
+.works-dot {
   width: 4px;
   height: 4px;
   border-radius: 50%;
+  background: rgba(86, 182, 198, 0.3);
+}
+
+.works-dot.active {
   background: #56B6C6;
+  box-shadow: 0 0 6px rgba(86, 182, 198, 0.8);
+  width: 20px;
+  border-radius: 2px;
 }
 
 /* ── Grid ── */
@@ -176,7 +201,9 @@ const openWork = (work) => emit('open-work', work);
 .masonry-item::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 2px;
   background: linear-gradient(90deg, #56B6C6, #8ACBD0);
   z-index: 3;
@@ -223,7 +250,10 @@ const openWork = (work) => emit('open-work', work);
 /* ── Overlay ── */
 .work-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(13, 9, 82, 0.85);
   display: flex;
   flex-direction: column;
@@ -264,32 +294,40 @@ const openWork = (work) => emit('open-work', work);
   display: flex;
   justify-content: center;
   padding: 2rem 0;
-}
-
-.load-more-gradient-wrap {
-  padding: 1.5px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(239,227,202,0.6), rgba(239,227,202,0.2));
-  display: inline-block;
+  background: linear-gradient(160deg, #0d0952 0%, #170C79 100%);
 }
 
 .load-more-btn {
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  padding: 9px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 32px;
   border-radius: 999px;
-  border: none;
-  background: #170C79;
-  color: #EFE3CA;
   cursor: pointer;
-  display: block;
-  transition: background 0.2s ease, color 0.2s ease;
+  background: transparent;
+  border: 1.5px solid rgba(239, 227, 202, 0.5);
+  color: #EFE3CA;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
 }
 
 .load-more-btn:hover {
-  background: transparent;
-  color: #EFE3CA;
+  border-color: rgba(239, 227, 202, 0.85);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(239, 227, 202, 0.12);
+}
+
+.load-more-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #56B6C6;
+  box-shadow: 0 0 6px rgba(86, 182, 198, 0.8);
+  flex-shrink: 0;
 }
 
 /* ── Responsive ── */
@@ -298,8 +336,15 @@ const openWork = (work) => emit('open-work', work);
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  .masonry-item        { height: 360px; }
-  .masonry-item.wide   { grid-column: span 2; height: 360px; }
+
+  .masonry-item {
+    height: 360px;
+  }
+
+  .masonry-item.wide {
+    grid-column: span 2;
+    height: 360px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -307,7 +352,11 @@ const openWork = (work) => emit('open-work', work);
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
   }
+
   .masonry-item,
-  .masonry-item.wide { grid-column: span 2; height: 280px; }
+  .masonry-item.wide {
+    grid-column: span 2;
+    height: 280px;
+  }
 }
 </style>
