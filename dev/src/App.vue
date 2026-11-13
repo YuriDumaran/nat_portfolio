@@ -209,6 +209,16 @@
                         :autoResize="true" rows="6" class="form-textarea" required />
                 </div>
 
+                <div class="form-group full-width captcha-group">
+                    <label class="form-label">Verification *</label>
+                    <div class="captcha-box">
+                        <span class="captcha-question">{{ captchaQuestion }}</span>
+                        <InputText v-model="captchaAnswer" inputmode="numeric" placeholder="Enter answer"
+                            class="form-input captcha-input" @input="captchaError = false" required />
+                    </div>
+                    <p v-if="captchaError" class="captcha-error">Please solve the captcha correctly.</p>
+                </div>
+
                 <Button label="Send Message" class="submit-button" type="submit" severity="primary" />
             </form>
         </div>
@@ -330,6 +340,10 @@ const resetTheme = () => {
 
 // ── Contact form ──────────────────────────────────────────────────────────────
 const contactForm = ref({ name: '', email: '', subject: '', phone: '', tier: '', message: '' })
+const captchaQuestion = ref('')
+const captchaAnswer = ref('')
+const captchaValue = ref(0)
+const captchaError = ref(false)
 
 // Kept in App.vue so the contact form dropdown stays in sync
 const tierOptions = [
@@ -338,6 +352,15 @@ const tierOptions = [
     { name: 'Premium',      price: 300 },
 ]
 
+const generateCaptcha = () => {
+    const firstNumber = Math.floor(Math.random() * 9) + 1
+    const secondNumber = Math.floor(Math.random() * 9) + 1
+    captchaQuestion.value = `Solve: ${firstNumber} + ${secondNumber}`
+    captchaValue.value = firstNumber + secondNumber
+    captchaAnswer.value = ''
+    captchaError.value = false
+}
+
 const selectTier = (tier) => {
     contactForm.value.tier = tier.name
     const el = document.getElementById('contact')
@@ -345,8 +368,15 @@ const selectTier = (tier) => {
 }
 
 const submitForm = () => {
+    if (Number(captchaAnswer.value) !== captchaValue.value) {
+        captchaError.value = true
+        generateCaptcha()
+        return
+    }
+
     console.log('Form submitted:', contactForm.value)
     contactForm.value = { name: '', email: '', subject: '', phone: '', tier: '', message: '' }
+    generateCaptcha()
     alert("Thank you for your message! We'll get back to you soon.")
 }
 
@@ -365,7 +395,10 @@ const items = ref([
 
 // ── Loader ────────────────────────────────────────────────────────────────────
 const isLoading = ref(true)
-onMounted(() => { setTimeout(() => { isLoading.value = false }, 2000) })
+onMounted(() => {
+    generateCaptcha()
+    setTimeout(() => { isLoading.value = false }, 2000)
+})
 </script>
 
 <style>
@@ -617,6 +650,11 @@ html, body { margin: 0; padding: 0; overflow-x: hidden; }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-group.full-width { grid-column: 1 / -1; }
 .form-label { font-weight: 600; font-size: 0.7rem; color: var(--10-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+.captcha-group { margin-top: 0.25rem; }
+.captcha-box { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; padding: 0.75rem 0 0; }
+.captcha-question { color: var(--text-bright); font-weight: 600; letter-spacing: 0.03em; }
+.captcha-input { max-width: 220px; }
+.captcha-error { margin: 0.25rem 0 0; font-size: 0.8rem; color: #fda4af; }
 .form-input {
     padding: 0.7rem 0; border: none; border-bottom: 1px solid rgba(86,182,198,0.3);
     border-radius: 0; background: transparent; color: var(--text-bright);
