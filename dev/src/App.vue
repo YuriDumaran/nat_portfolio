@@ -1,4 +1,4 @@
-﻿<template>
+<template>
 
     <!-- Loading Screen -->
     <div class="loader-overlay" :class="{ 'loader-hidden': !isLoading }">
@@ -428,8 +428,8 @@ onMounted(() => {
 html, body { margin: 0; padding: 0; overflow-x: hidden; }
 #app { margin: 0; padding: 0; overflow: hidden; }
 * { font-family: 'Poppins', sans-serif; }
-:global(body), :global(html) { margin: 0; padding: 0; overflow-x: hidden; }
-:global(#app) { margin: 0; padding: 0; }
+body, html { margin: 0; padding: 0; overflow-x: hidden; }
+#app { margin: 0; padding: 0; }
 
 /* ============================================================
    LOADER
@@ -600,9 +600,9 @@ html, body { margin: 0; padding: 0; overflow-x: hidden; }
 /* ============================================================
    WORK MODAL
    ============================================================ */
-.work-modal :deep(.p-dialog) { border: none !important; border-radius: 4px; overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,0.5); padding: 0 !important; }
-.work-modal :deep(.p-dialog-content) { padding: 0 !important; background: var(--60-primary); overflow: hidden; }
-.work-modal :deep(.p-dialog > .p-dialog-content) { padding: 0 !important; }
+.work-modal .p-dialog { border: none !important; border-radius: 4px; overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,0.5); padding: 0 !important; }
+.work-modal .p-dialog-content { padding: 0 !important; background: var(--60-primary); overflow: hidden; }
+.work-modal .p-dialog > .p-dialog-content { padding: 0 !important; }
 .modal-content { position: relative; display: flex; flex-direction: column; border-radius: 4px; width: fit-content; max-width: 90vw; max-height: 90vh; overflow: hidden; }
 .modal-image { width: auto; height: auto; max-width: 90vw; max-height: calc(90vh - 60px); display: block; object-fit: contain; }
 .modal-close-btn {
